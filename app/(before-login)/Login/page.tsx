@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Login() {
   return (
@@ -16,15 +17,19 @@ export default function Login() {
           <i className="pi pi-lock text-[#003550]"></i>
         </div>
         <div className="w-[55%]"><p className="cursor-pointer text-end text-sm text-[#003550] underline">Registre-se</p></div>
-      
-      
-        <div 
-          className="w-fit h-[2rem] border-2 border-[#003550] text-[#003550] flex items-center p-2 rounded-md shadow-xl
-          transition-transform duration-300 hover:scale-105 hover:text-white cursor-pointer hover:bg-gradient-to-r hover:from-[#71C9F5] hover:via-[#3E7B9A] hover:to-[#003550]">
-            <button className="px-2 cursor-pointer">
-            Entrar
-            </button>
-        </div>
+
+
+        {/* <motion.div
+          whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
+          whileTap={{ scale: 0.95 }}
+          className="
+                cursor-pointer px-6 py-2 rounded-md
+                bg-gradient-to-br from-[#3E7B9A] via-[#003550] to-[#003550]
+                bg-[length:200%_100%] text-white
+              "
+        >
+          Começar estudos
+        </motion.div> */}
       </div>
     </div>
   );
