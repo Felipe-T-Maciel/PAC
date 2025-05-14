@@ -1,5 +1,6 @@
 import { motion } from "motion/react"
 import Image from "next/image"
+import { useState } from "react"
 
 interface ContentComponentProps {
     content: any
@@ -10,10 +11,19 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
         hidden: { y: 10, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
     }
+    //Precisa das tela de login pra colocar o usuario no context e verificar se tem ocnta ou nao
+    const [logged, setLogged] = useState(false)
 
     return (
         <>
-            <div className="flex flex-col justify-center items-start w-full max-w-[75vw]">
+            {
+                !logged && (
+                    <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+                        <span onClick={() => {setLogged(true)}} className="bg-white p-10 text-5xl z-20 rounded-2xl shadow-2xl text-black">Faça login para acessar o conteúdo</span>
+                    </div>
+                )
+            }
+            <div className={`flex flex-col justify-center items-start w-full max-w-[75vw] ` + (logged ? "" : "blur-md ")}>
                 <motion.div
                     variants={itemVariants}
                     initial="hidden"
@@ -64,7 +74,7 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
                             animate="show"
                             className="flex flex-col py-36">
                             <div className="flex flex-col gap-20">
-                                <span className="text-5xl text-white">{content.exercises[0].title}</span>
+                                <span className="text-5xl">{content.exercises[0].title}</span>
                                 <span className="text-2xl">{content.exercises[0].content}</span>
                                 <div>
                                     {content.exercises[0].options.map((item: any, index: number) => (

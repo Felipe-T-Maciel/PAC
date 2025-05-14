@@ -41,19 +41,21 @@ export default function Conteudo() {
     return (
         <>
             <main className="h-full w-full relative flex overflow-hidden">
-                <img className="absolute -bottom-15 -right-10 -z-10" src="/back4.svg" alt="" />
+                {content.title == null && (
+                    <img className="absolute -bottom-15 -right-10 -z-10" src="/back4.svg" alt="" />
+                )}
                 <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: sideOpen ? "15%" : 0 }}
                     exit={{ width: 0 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
-                    className={`left-0 top-0 h-full bg-gradient-to-bl from-[#003550] via-[#003550] to-[#3E7B9A] text-white relative`}
+                    className={`left-0 top-0 h-full bg-gradient-to-bl from-[#003550] via-[#003550] to-[#3E7B9A] text-white relative z-10`}
                     style={{ display: sideOpen ? "block " : "" }}
                 >
 
                     {sideOpen && (
                         <>
-                            <div className="absolute left-[1.4rem] h-full w-1 bg-gray-400 " />
+                            <div className="absolute left-[1.45rem] h-full w-0.5 bg-gray-400 " />
                             <div className="flex flex-col gap-2 p-4 py-20 overflow-y-auto h-full relative">
 
                                 {contents.map((item, index) => {
@@ -134,7 +136,7 @@ export default function Conteudo() {
                     initial={{ left: 0 }}
                     animate={{ left: sideOpen ? "15.5rem" : 0 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
-                    onClick={() => { setSideOpen(!sideOpen) }} className={` text-white bg-gradient-to-bl from-[#003550] to-[#003550]  w-7 h-10  top-[50%] left-0 -translate-y-1/2 rounded-r-full shadow-custom items-center flex justify-center absolute `}>
+                    onClick={() => { setSideOpen(!sideOpen) }} className={`z-10 text-white bg-gradient-to-bl from-[#003550] to-[#003550]  w-7 h-10  top-[50%] left-0 -translate-y-1/2 rounded-r-full shadow-custom items-center flex justify-center absolute `}>
                     <span
                         className={`transition-all duration-200  pi cursor-pointer pi-angle-right ` + (sideOpen ? " rotate-180" : "left-2")}
                     ></span>
@@ -146,7 +148,6 @@ export default function Conteudo() {
                         <div id="image" className="bg-black h-[35%] w-full relative ">
                             {/* <Image src={content.thumb} width={0} height={0} layout="fill" objectFit="cover" alt="" /> */}
                         </div>
-
                         <ContentComponent content={content} />
 
                     </div>
