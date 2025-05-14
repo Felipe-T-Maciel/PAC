@@ -3,14 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { contents } from "@/src/util/content";
+import { ContentComponent } from "@/src/components/ContentComponent/ContentComponent";
+
 
 interface Content {
     thumb: string;
     title: string;
-    content: string;
+    content: string[];
     subtitles?: string[];
-    image?: string;
-    exercises?: string[];
+    image?: string[];
+    exercises?: any[];
 }
 
 export default function Conteudo() {
@@ -19,10 +22,10 @@ export default function Conteudo() {
     const [content, setContent] = useState<Content>({
         thumb: "",
         title: "",
-        content: "",
+        content: [],
         subtitles: [],
-        image: "",
-        exercises: []
+        image: [],
+        exercises: [],
     });
 
     const itemVariants = {
@@ -35,59 +38,6 @@ export default function Conteudo() {
             prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
         )
     }
-
-    const contents = [
-        {
-            "thumb": "/",
-            "title": "Content 1",
-            "subtitles": ["Subtitle", "Subtitle"],
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "image": "",
-            "exercises": []
-        },
-        {
-            "thumb": "/",
-            "title": "Content 2",
-            "subtitles": ["Subtitle", "Subtitle"],
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "image": "",
-            "exercises": []
-        },
-        {
-            "thumb": "/",
-            "title": "Content 3",
-            "subtitles": ["Subtitle", "Subtitle"],
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "image": "",
-            "exercises": []
-        },
-        {
-            "thumb": "/",
-            "title": "Content 4",
-            "subtitles": ["Subtitle", "Subtitle"],
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "image": "",
-            "exercises": []
-        },
-        {
-            "thumb": "/",
-            "title": "Content 5",
-            "subtitles": ["Subtitle", "Subtitle"],
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "image": "",
-            "exercises": []
-        },
-        {
-            "thumb": "/",
-            "title": "Content 6",
-            "subtitles": ["Subtitle", "Subtitle"],
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "image": "",
-            "exercises": []
-        },
-
-    ];
-
     return (
         <>
             <main className="h-full w-full relative flex overflow-hidden">
@@ -189,29 +139,20 @@ export default function Conteudo() {
                         className={`transition-all duration-200  pi cursor-pointer pi-angle-right ` + (sideOpen ? " rotate-180" : "left-2")}
                     ></span>
                 </motion.div>
-                <AnimatePresence>
-                    {content.title ? (
-                        <motion.div
-                            key={content.title}
-                            className="w-full py-16">
-                            <div id="image" className="bg-black h-[35%] w-full relative">
-                                {/* <Image src={content.thumb} width={0} height={0} layout="fill" objectFit="cover" alt="" /> */}
-                                <div className="absolute top-[15%] w-full bg-gradient-to-r  via-[#003550] to-[#f0f0f0] ">
-                                    <span className="px-20 text-4xl text-white">{content.title}</span>
-                                </div>
-                            </div>
+                {content.title ? (
+                    <div
+                        key={content.title}
+                        className="w-full py-16 overflow-y-auto flex flex-col items-center">
+                        <div id="image" className="bg-black h-[35%] w-full relative ">
+                            {/* <Image src={content.thumb} width={0} height={0} layout="fill" objectFit="cover" alt="" /> */}
+                        </div>
 
-                            <motion.div
-                                variants={itemVariants}
-                                initial="hidden"
-                                animate="show"
-                                className="flex flex-col px-[10%] py-36">
-                                <div>
-                                    <span className="text-2xl">{content.content}</span>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    ) : (
+                        <ContentComponent content={content} />
+
+                    </div>
+                ) : (
+                    <AnimatePresence>
+
                         <motion.div
                             key="empty"
                             initial="hidden"
@@ -226,8 +167,8 @@ export default function Conteudo() {
                                 transition={{ duration: 4, ease: 'easeIn', repeat: Infinity }}
                             >Nenhum conteúdo selecionado, acesse a aba lateral para navegar pelos conteúdos disponíveis.</motion.span>
                         </motion.div>
-                    )}
-                </AnimatePresence>
+                    </AnimatePresence>
+                )}
             </main>
         </>
     );
