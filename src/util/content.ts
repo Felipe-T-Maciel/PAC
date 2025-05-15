@@ -1,228 +1,40 @@
 export const contents = [
     {
         "thumb": "/",
-        "title": "Content 1",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
+        "title": "Aprendendo",
+        "subtitles": ["Subtitle"],
+        "content": ["Lorem ipsum dolor sit amet,Lorem consectetur adipiscing Lorem ipsum dolor sit amet,Lorem consectetur adipiscing Lorem ipsum dolor sit amet,Lorem consectetur adipiscing Lorem ipsum dolor sit amet,Lorem consectetur adipiscing Lorem ipsum dolor sit amet,Lorem consectetur adipiscing Lorem ipsum dolor sit amet,Lorem consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet,Lorem consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet,Lorem consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet,Lorem consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
 
         "image": ["/teste.jpeg", "/content.png"],
         "exercises": [{
             "title": "Test 1",
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labo incididunt ut labore e incididunt ut labore e incididunt ut labore e incididunt ut labore e incididunt ut labore ere et dolore magna aliqua. Lorem ipsum dolor sit amet,Lorem consectetur adipiscing ",
             "image": "/teste.jpeg",
             "options": [
-                { "text": "Option 1", "correct": true },
-                { "text": "Option 2", "correct": false },
-                { "text": "Option 3", "correct": false },
-                { "text": "Option 4", "correct": false }
+                { "text": "a", "correct": true },
+                { "text": "b", "correct": false },
+                { "text": "c", "correct": false },
+                { "text": "d", "correct": false }
             ]
         }]
     },
     {
         "thumb": "/",
-        "title": "Content 2",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
+        "title": "Titulo do conteudo",
+        "subtitles": ["subtitulo do conteudo"],
+        "content": ["dasuidhu uiahduash hasud haushd uahsdua shduahsu dhasuhd uiashdhaish duiashdui hasuidh uiashduhasiu dashd uihasuidh ashdu ah dasuidhu uiahduash hasud haushd uahsdua shduahsu dhasuhd uiashdhaish duiashdui hasuidh uiashduhasiu dashd uihasuidh ashdu ah dasuidhu uiahduash hasud haushd uahsdua shduahsu dhasuhd uiashdhaish duiashdui hasuidh uiashduhasiu dashd uihasuidh ashdu ah", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
 
         "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 3",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 4",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 5",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 6",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 7",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 8",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 9",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 10",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 11",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 12",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 13",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 14",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 15",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 16",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 17",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 18",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 19",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 20",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 21",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 22",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 23",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
-    {
-        "thumb": "/",
-        "title": "Content 24",
-        "subtitles": ["Subtitle", "Subtitle"],
-        "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. "],
-
-        "image": ["/teste.jpeg", "/content.png"],
-        "exercises": []
-    },
+        "exercises": [{
+            "title": "Exercicio muito legal",
+            "content": "dasuidhu uiahduash hasud haushd uahsdua shduahsu dhasuhd uiashdhaish duiashdui hasuidh uiashduhasiu dashd uihasuidh ashdu ahdasuidhu uiahduash hasud haushd uahsdua shduahsu dhasuhd uiashdhaish duiashdui hasuidh uiashduhasiu dashd uihasuidh ashdu ahdasuidhu uiahduash hasud haushd uahsdua shduahsu dhasuhd uiashdhaish duiashdui hasuidh uiashduhasiu dashd uihasuidh ashdu ah",
+            "image": "/teste.jpeg",
+            "options": [
+                { "text": "Sim", "correct": true },
+                { "text": "Quase sim", "correct": false },
+                { "text": "Talvez", "correct": false },
+                { "text": "Possivelmente", "correct": false }
+            ]
+        }]
+    }
 ];

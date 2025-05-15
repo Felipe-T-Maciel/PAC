@@ -19,6 +19,9 @@ interface Content {
 export default function Conteudo() {
     const [sideOpen, setSideOpen] = useState(false);
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
+    const sectionRefs = useRef<(HTMLElement | null)[]>([])
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
     const [content, setContent] = useState<Content>({
         thumb: "",
         title: "",
@@ -27,6 +30,34 @@ export default function Conteudo() {
         image: [],
         exercises: [],
     });
+
+    useEffect(() => {
+        document.body.getBoundingClientRect();
+    }, [content]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const middleY = window.innerHeight / 2;
+
+            const newIndex = sectionRefs.current.findIndex((el) => {
+                if (!el) return false;
+                const rect = el.getBoundingClientRect();
+                return rect.top <= middleY && rect.bottom >= middleY;
+            });
+
+            if (newIndex !== -1 && newIndex !== activeIndex) {
+                setActiveIndex(newIndex);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [activeIndex]);
+
 
     const itemVariants = {
         hidden: { y: 10, opacity: 0 },
@@ -38,9 +69,44 @@ export default function Conteudo() {
             prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
         )
     }
+
+    const scrollToSection = (index: number) => {
+        sectionRefs.current[index]?.scrollIntoView({
+            behavior: "smooth",
+        });
+        setActiveIndex(index);
+    };
+
+
+    const pointsCount = 1
+        + (content.subtitles?.length ?? 0)
+        + (content.exercises?.length ?? 0)
     return (
         <>
             <main className="h-full w-full relative flex overflow-hidden">
+                {content?.title && (
+                    <AnimatePresence>
+                        <div key="nav-sidebar" className="fixed right-8 top-1/2 transform -translate-y-1/2 flex flex-col items-center pointer-events-none z-30">
+                            <div className="w-1 bg-gray-300 h-full absolute" />
+                            <div className="flex flex-col justify-between h-full py-8 pointer-events-auto">
+                                {Array.from({ length: pointsCount }).map((_, index) => {
+                                    sectionRefs.current = sectionRefs.current.slice(0, pointsCount)
+                                    const isActive = index === activeIndex;
+                                    return (
+                                        <motion.button
+                                            key={`dot-${index}`}
+                                            onClick={() => scrollToSection(index)}
+                                            className={`w-4 h-4 rounded-full border-2 mb-4 z-10 ${isActive ? 'bg-blue-500 border-blue-700' : 'bg-white border-gray-400'}`}
+                                            initial={false}
+                                            animate={{ scale: isActive ? 1.3 : 1, opacity: isActive ? 1 : 0.5 }}
+                                            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                                        />
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </AnimatePresence>
+                )}
                 {content.title == null && (
                     <img className="absolute -bottom-15 -right-10 -z-10" src="/back4.svg" alt="" />
                 )}
@@ -52,12 +118,12 @@ export default function Conteudo() {
                     className={`left-0 top-0 h-full bg-gradient-to-bl from-[#003550] via-[#003550] to-[#3E7B9A] text-white relative z-10`}
                     style={{ display: sideOpen ? "block " : "" }}
                 >
-
                     {sideOpen && (
                         <>
-                            <div className="absolute left-[1.45rem] h-full w-0.5 bg-gray-400 " />
-                            <div className="flex flex-col gap-2 p-4 py-20 overflow-y-auto h-full relative">
-
+                            <div
+                                
+                                className="w-full overflow-y-auto h-full flex flex-col p-5 scroll-smooth py-20 "
+                            >
                                 {contents.map((item, index) => {
                                     const currentIndex = contents.findIndex(c => c.title === content.title);
                                     const isCompleted = index < currentIndex;
@@ -65,7 +131,7 @@ export default function Conteudo() {
 
                                     return (
 
-                                        <div key={index} className="flex flex-col relative pl-6">
+                                        <div key={item.title} className="flex flex-col relative pl-6">
                                             <div className="absolute left-0 top-3 flex items-center justify-center">
                                                 <div
                                                     className={`w-4 h-4 rounded-full border-2 transition-all duration-300
@@ -78,11 +144,14 @@ export default function Conteudo() {
                                                 />
                                             </div>
 
-                                            <div className="flex items-center justify-between p-2 rounded-md">
+                                            <div
+                                                key={index}
+                                                className="flex items-center justify-between p-2 rounded-md ">
                                                 <span
                                                     className="cursor-pointer"
                                                     onClick={() => {
                                                         setContent(item);
+                                                        setActiveIndex(null);
                                                         if (content.title !== item.title && expandedIndexes.includes(index)) {
                                                         } else {
                                                             toggleExpand(index);
@@ -115,6 +184,7 @@ export default function Conteudo() {
                                                             <motion.div
                                                                 variants={itemVariants}
                                                                 key={subIndex}
+                                                                onClick={() => (setContent(item), scrollToSection(subIndex + 1))}
                                                                 className="cursor-pointer p-1 text-sm"
                                                             >
                                                                 {subtitle}
@@ -144,12 +214,10 @@ export default function Conteudo() {
                 {content.title ? (
                     <div
                         key={content.title}
-                        className="w-full py-16 overflow-y-auto flex flex-col items-center">
-                        <div id="image" className="bg-black h-[35%] w-full relative ">
-                            {/* <Image src={content.thumb} width={0} height={0} layout="fill" objectFit="cover" alt="" /> */}
-                        </div>
-                        <ContentComponent content={content} />
-
+                        className="w-full  overflow-y-auto h-full flex flex-col items-center">
+                        <div id="image" className="bg-black w-full py-40" />
+                        <Image src={content.thumb} width={0} height={0} alt="" />
+                        <ContentComponent sectionRefs={sectionRefs} content={content} />
                     </div>
                 ) : (
                     <AnimatePresence>

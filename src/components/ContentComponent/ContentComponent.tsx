@@ -1,34 +1,45 @@
-import { motion } from "motion/react"
+'use client'
+
+import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface ContentComponentProps {
-    content: any
+    content: any,
+    sectionRefs: React.MutableRefObject<any[]>
 }
 
-export const ContentComponent = ({ content }: ContentComponentProps) => {
+export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps) => {
     const itemVariants = {
         hidden: { y: 10, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
     }
-    //Precisa das tela de login pra colocar o usuario no context e verificar se tem ocnta ou nao
+
     const [logged, setLogged] = useState(false)
+    const [answer, setAnswer] = useState<any>(null)
+
+    useEffect(() => {
+        console.log("Answer: ", answer);
+    }, [answer])
 
     return (
         <>
             {
                 !logged && (
                     <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-                        <span onClick={() => {setLogged(true)}} className="bg-white p-10 text-5xl z-20 rounded-2xl shadow-2xl text-black">Faça login para acessar o conteúdo</span>
+                        <span onClick={() => { setLogged(true) }} className="bg-white p-10 text-5xl z-20 rounded-2xl shadow-2xl text-black">Faça login para acessar o conteúdo</span>
                     </div>
                 )
             }
-            <div className={`flex flex-col justify-center items-start w-full max-w-[75vw] ` + (logged ? "" : "blur-md ")}>
+            <div className={`relative flex flex-col justify-center items-start w-full max-w-[75vw] ` + (logged ? "" : "blur-md ")}>
+
                 <motion.div
+                    ref={el => { if (el) sectionRefs.current[0] = el }}
                     variants={itemVariants}
                     initial="hidden"
                     animate="show"
-                    className="flex flex-col  py-36">
+                    className="flex flex-col py-36"
+                    data-scroll-id="title">
                     <div className="flex flex-col gap-20">
                         <span className="text-6xl">{content.title}</span>
                         <span className="text-2xl">{content.content[0]}</span>
@@ -40,28 +51,33 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
                             variants={itemVariants}
                             initial="hidden"
                             animate="show"
-                            className="flex flex-col  gap-20 rounded-xl">
+                            className="flex flex-col gap-20 rounded-xl shadow-2xl">
                             <Image src={content.image[0]} width={1000} height={30} alt="" className="rounded-xl" />
                         </motion.div>
                     </div>
                 )}
-                <motion.div
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate="show"
-                    className="flex flex-col  py-36">
-                    <div className="flex flex-col gap-20">
-                        <span className="text-5xl">{content.subtitles[0]}</span>
-                        <span className="text-2xl">{content.content[1]}</span>
-                    </div>
-                </motion.div>
-                {content.image != null && (
+                {content.subtitles.map((subtitle: string, index: number) => (
+                    <motion.div
+                        key={index + 1}
+                        ref={el => { if (el) sectionRefs.current[index + 1] = el }}
+                        variants={itemVariants}
+                        initial="hidden"
+                        animate="show"
+                        className="flex flex-col py-36"
+                        data-scroll-id={`sub${index + 1}`}>
+                        <div className="flex flex-col gap-20">
+                            <span className="text-5xl">{subtitle}</span>
+                            <span className="text-2xl">{content.content[index + 1]}</span>
+                        </div>
+                    </motion.div>
+                ))}
+                {content.image != null && content.image[1] && (
                     <div className="flex justify-center w-full">
                         <motion.div
                             variants={itemVariants}
                             initial="hidden"
                             animate="show"
-                            className="flex flex-col  gap-20 rounded-xl">
+                            className="flex flex-col gap-20 rounded-xl shadow-2xl">
                             <Image src={content.image[1]} width={1000} height={30} alt="" className="rounded-xl" />
                         </motion.div>
                     </div>
@@ -70,19 +86,38 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
                     content.exercises != null && content.exercises.length > 0 && (
                         <motion.div
                             variants={itemVariants}
+                            ref={el => { if (el) sectionRefs.current[(content.subtitles?.length ?? 0) + 1] = el }}
                             initial="hidden"
                             animate="show"
-                            className="flex flex-col py-36">
-                            <div className="flex flex-col gap-20">
+                            className="flex flex-col py-36"
+                            data-scroll-id="ex1">
+                            <div className="flex flex-col gap-10">
                                 <span className="text-5xl">{content.exercises[0].title}</span>
                                 <span className="text-2xl">{content.exercises[0].content}</span>
-                                <div>
-                                    {content.exercises[0].options.map((item: any, index: number) => (
-                                        <div key={index} className="flex gap-4">
-                                            <input type="checkbox" name="" id="" />
-                                            <span className="text-2xl">{item.text}</span>
-                                        </div>
-                                    ))}
+                                <div className="flex flex-col gap-10 relative">
+                                    <div className="flex flex-col gap-1">
+                                        {content.exercises[0].options.map((item: any, index: number) => (
+                                            <label key={index} className="flex items-center gap-4 cursor-pointer w-fit">
+                                                <input className="peer hidden" onClick={(e) => setAnswer(e.currentTarget.value)} type="radio" name="answer" value={item.text} />
+                                                <div className="w-5 h-5 rounded-full border-2 border-gray-400 peer-checked:border-blue-600 peer-checked:bg-slate-500 transition-all duration-300 flex items-center justify-center">
+                                                    <div className="w-2.5 h-2.5 bg-white rounded-full scale-0 peer-checked:scale-100 transition-transform"></div>
+                                                </div>
+                                                <span className="text-2xl">{item.text}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                    <motion.div
+                                        variants={itemVariants}
+                                        whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="
+                                                    shadow-custom cursor-pointer px-6 py-2 rounded-md font-medium
+                                                    bg-gradient-to-br from-[#3E7B9A] via-[#003550] to-[#003550]
+                                                    bg-[length:200%_100%] text-white w-34 text-center
+                                                  "
+                                    >
+                                        Validar
+                                    </motion.div>
                                 </div>
                             </div>
                         </motion.div>
