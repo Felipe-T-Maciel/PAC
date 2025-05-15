@@ -121,7 +121,7 @@ export default function Conteudo() {
                     {sideOpen && (
                         <>
                             <div
-                                
+
                                 className="w-full overflow-y-auto h-full flex flex-col p-5 scroll-smooth py-20 "
                             >
                                 {contents.map((item, index) => {
@@ -206,7 +206,7 @@ export default function Conteudo() {
                     initial={{ left: 0 }}
                     animate={{ left: sideOpen ? "15.5rem" : 0 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
-                    onClick={() => { setSideOpen(!sideOpen) }} className={`z-10 text-white bg-gradient-to-bl from-[#003550] to-[#003550]  w-7 h-10  top-[50%] left-0 -translate-y-1/2 rounded-r-full shadow-custom items-center flex justify-center absolute `}>
+                    onClick={() => { setSideOpen(!sideOpen) }} className={`cursor-pointer z-10 text-white bg-gradient-to-bl from-[#003550] to-[#003550]  w-7 h-10  top-[50%] left-0 -translate-y-1/2 rounded-r-full shadow-custom items-center flex justify-center absolute `}>
                     <span
                         className={`transition-all duration-200  pi cursor-pointer pi-angle-right ` + (sideOpen ? " rotate-180" : "left-2")}
                     ></span>
@@ -215,8 +215,10 @@ export default function Conteudo() {
                     <div
                         key={content.title}
                         className="w-full  overflow-y-auto h-full flex flex-col items-center">
-                        <div id="image" className="bg-black w-full py-40" />
-                        <Image src={content.thumb} width={0} height={0} alt="" />
+                        <div id="image" className="relative bg-black w-full h-full py-40">
+                            <Image src={content.thumb} alt={content.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw"/>
+                        </div>
+
                         <ContentComponent sectionRefs={sectionRefs} content={content} />
                     </div>
                 ) : (
