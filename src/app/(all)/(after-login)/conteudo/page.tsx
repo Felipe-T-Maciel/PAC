@@ -19,7 +19,7 @@ export default function Conteudo() {
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
     const sectionRefs = useRef<(HTMLElement | null)[]>([])
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
+    const [sideContentOpen, setSideContentOpen] = useState(false);
     const [content, setContent] = useState<Content>({
         thumb: "",
         title: {
@@ -82,6 +82,10 @@ export default function Conteudo() {
         setActiveIndex(index);
     };
 
+    useEffect(() => {
+        scrollToSection(0);
+    }, [content]);
+
 
     const pointsCount = 1
         + (content.subtitles?.length ?? 0)
@@ -91,35 +95,78 @@ export default function Conteudo() {
             <main className="h-full w-full relative flex overflow-hidden">
                 {content?.title.text && (
                     <AnimatePresence>
-                        <div key="nav-sidebar" className="fixed right-8 top-1/2 transform -translate-y-1/2 flex flex-col items-center pointer-events-none z-10">
-                            <div className="w-1 bg-gray-300 h-full absolute right-1.5" />
-                            <div className="flex flex-col justify-between h-full py-8 pointer-events-auto">
-                                {Array.from({ length: pointsCount }).map((_, index) => {
-                                    sectionRefs.current = sectionRefs.current.slice(0, pointsCount)
-                                    const isActive = index === activeIndex;
-                                    return (
-                                        <motion.div
-                                            className="flex justify-between gap-5" key={index}>
-                                            <motion.label
-                                                className={`cursor-pointer  ${isActive ? "text-blue-500" : ""}`} htmlFor={`dot-${index}`}>
-                                                {sectionRefs.current[index]?.textContent?.split(" ")[0]}
-                                            </motion.label>
-                                            <motion.button
-                                                id={`dot-${index}`}
-                                                key={`dot-${index}`}
-                                                onClick={() => scrollToSection(index)}
-                                                className={`cursor-pointer w-4 h-4 rounded-full border-2 mb-4 z-10 ${isActive ? 'bg-blue-500 border-blue-700' : 'bg-white border-gray-400'}`}
-                                                initial={false}
-                                                animate={{ scale: isActive ? 1.3 : 1, opacity: isActive ? 1 : 0.5 }}
-                                                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                            />
-                                        </motion.div>
+                        {content && (
+                            <motion.div
+                                key="nav-sidebar"
+                                initial={{ height: 40, opacity: 0 }}
+                                animate={{ height: sideContentOpen ? 40 : 200, opacity: 1 }}
+                                exit={{ height: 40, opacity: 0 }}
+                                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                className="fixed right-8 top-1/5 flex flex-col items-center z-10 bg-gray-200 text-black shadow-lg rounded-lg px-4 w-40 overflow-hidden"
+                            >
+                                <motion.div
+                                    initial={{ height: '80%' }}
+                                    animate={{ height: !sideContentOpen ? '80%' : '0%' }}
+                                    exit={{ height: '80%' }}
+                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                    className="w-1 bg-gray-300 absolute right-5.5 rounded-b-lg"
+                                />
 
-                                    )
-                                })}
-                            </div>
-                        </div>
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, y: -10 },
+                                        show: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } }
+                                    }}
+                                    initial="hidden"
+                                    animate={sideContentOpen ? 'hidden' : 'show'}
+                                    exit="hidden"
+                                    className={`flex flex-col justify-between h-full w-full pt-2 pointer-events-auto z-10 ${sideContentOpen ? 'overflow-hidden' : ''}`}
+                                >
+                                    {Array.from({ length: pointsCount }).map((_, i) => {
+                                        const isActive = i === activeIndex
+                                        return (
+                                            <motion.div
+                                                key={i}
+                                                variants={{
+                                                    hidden: { opacity: 0, x: -10 },
+                                                    show: { opacity: 1, x: 0 }
+                                                }}
+                                                className="flex justify-between gap-5"
+                                            >
+                                                <motion.label
+                                                    className={`cursor-pointer ${isActive ? 'text-blue-500' : ''}`}
+                                                    htmlFor={`dot-${i}`}
+                                                >
+                                                    {sectionRefs.current[i]?.textContent?.split(' ')[0]}
+                                                </motion.label>
+                                                <motion.button
+                                                    id={`dot-${i}`}
+                                                    onClick={() => scrollToSection(i)}
+                                                    className={`w-4 h-4 rounded-full border-2 mb-4 cursor-pointer ${isActive ? 'bg-blue-500 border-blue-700' : 'bg-white border-gray-400'}`}
+                                                    initial={false}
+                                                    animate={{ scale: isActive ? 1.4 : 1, opacity: isActive ? 1 : 0.5 }}
+                                                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                                                />
+                                            </motion.div>
+                                        )
+                                    })}
+                                </motion.div>
+
+                                <motion.div
+                                    className="flex justify-center items-center py-3"
+                                    initial={{ rotate: 0 }}
+                                    animate={{ rotate: sideContentOpen ? 180 : 0 }}
+                                    transition={{ duration: 0.2}}
+                                >
+                                    <span
+                                        onClick={() => setSideContentOpen(!sideContentOpen)}
+                                        className="pi pi-angle-up cursor-pointer transition-all duration-200"
+                                    />
+                                </motion.div>
+                            </motion.div>
+                        )}
                     </AnimatePresence>
+
                 )}
 
                 <motion.div
@@ -235,10 +282,7 @@ export default function Conteudo() {
                 {content.title.text ? (
                     <div
                         key={content.title.text}
-                        className="w-full overflow-y-auto h-full flex flex-col items-center ">
-                        <div id="image" className="relative bg-black w-full h-full py-40">
-                            <Image src={content.thumb} alt={content.title.text} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                        </div>
+                        className="w-full overflow-y-auto h-full flex flex-col items-center pt-16">
 
                         <ContentComponent sectionRefs={sectionRefs} content={content} />
                     </div>

@@ -29,7 +29,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
 
     useEffect(() => {
         console.log(content.subtitles);
-        
+
     }, [])
 
     return (
@@ -41,14 +41,16 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                     </div>
                 )
             }
-            <div className={`relative flex flex-col justify-center items-start w-full max-w-[75vw] ` + (logged ? "" : "blur-md")}>
-
+            <div id="image" className="relative bg-black w-full h-full p-30">
+                <Image src={content.thumb} alt={content.title.text} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+            </div>
+            <div className={`relative flex flex-col justify-center items-start w-full  max-w-[75vw] ` + (logged ? "" : "blur-md")}>
                 <motion.div
                     ref={el => { if (el) sectionRefs.current[0] = el }}
                     variants={itemVariants}
                     initial="hidden"
                     animate="show"
-                    className="flex flex-col py-36"
+                    className="flex flex-col py-16"
                     data-scroll-id="title">
                     <div className="flex flex-col gap-20">
                         <span className="text-6xl">{content.title.text}</span>
@@ -93,7 +95,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                             ref={el => { if (el) sectionRefs.current[(content.subtitles?.length ?? 0) + 1] = el }}
                             initial="hidden"
                             animate="show"
-                            className="flex flex-col py-36"
+                            className="flex flex-col py-10 "
                             data-scroll-id="ex1">
                             <div className="flex flex-col gap-10">
                                 <span className="text-5xl">{content.exercises[0].title}</span>
@@ -103,7 +105,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                         {content.exercises[0].options.map((item: any, index: number) => (
                                             <label key={index} className="flex items-center gap-4 cursor-pointer w-fit">
                                                 <input className="peer hidden" onClick={(e) => setAnswer(e.currentTarget.value)} type="radio" name="answer" value={item.text} />
-                                                <div className="w-5 h-5 rounded-full border-2 border-gray-400 peer-checked:border-blue-600 peer-checked:bg-slate-500 transition-all duration-300 flex items-center justify-center">
+                                                <div className="w-5 h-5 rounded-full border-2 bg-white border-gray-400 peer-checked:bg-blue-500 peer-checked:border-blue-700 transition-all duration-300 flex items-center justify-center">
                                                     <div className="w-2.5 h-2.5 bg-white rounded-full scale-0 peer-checked:scale-100 transition-transform"></div>
                                                 </div>
                                                 <span className="text-2xl">{item.text}</span>
