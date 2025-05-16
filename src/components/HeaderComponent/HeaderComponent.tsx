@@ -39,7 +39,7 @@ export const HeaderComponent = () => {
         <>
             <div className="fixed z-50 flex items-center w-full h-16 justify-between mont-montserrat bg-[#003550]">
                 <div onClick={() => router.push("/home")} className="w-[80%] px-4 cursor-pointer">
-                    {/* <Image src={"/catolica_png.png"} width={40} height={40} alt="a"></Image> */}
+                    <Image src={"/catolica_png.png"} width={40} height={40} alt="logo catolica"></Image>
                 </div>
                 <div className="flex items-center justify-end w-[20%] px-4 h-8 gap-4 cursor-pointer text-white">
                     <div className="flex ">
