@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { contents } from "@/src/util/content";
 import { ContentComponent } from "@/src/components/ContentComponent/ContentComponent";
 
@@ -89,18 +88,15 @@ export default function Conteudo() {
     };
 
     useEffect(() => {
-        scrollToSection(0);
+        scrollToSection(-1);
     }, [content]);
 
     const changePageButton = (option: "next" | "back") => {
-        const idx = contents.findIndex(c => c.title.text === content.title.text);
-        const newIdx = option === "next" ? idx + 1 : idx - 1;
-        setContent(contents[newIdx]);
-        setActiveIndex(0);           // define o primeiro como ativo
-        sectionRefs.current = [];    // opcional: zera as refs pra não segurar elementos antigos
-        scrollToSection(0);
+        const index = contents.findIndex(c => c.title.text === content.title.text);
+        const newIndex = option === "next" ? index + 1 : index - 1;
+        setContent(contents[newIndex]);
+        setActiveIndex(null);
     }
-
 
     return (
         <>
@@ -110,8 +106,9 @@ export default function Conteudo() {
                         {content && (
                             <motion.div
                                 key={content.title.text}
+                                style={{ maxHeight: "800px" }}
                                 initial={{ height: 80, opacity: 0 }}
-                                animate={{ height: sideContentOpen ? 80 : 220, opacity: 1 }}
+                                animate={{ height: sideContentOpen ? 80 : "auto", opacity: 1 }}
                                 exit={{ height: 80, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                                 className={`fixed right-8 top-1/5 flex flex-col items-center z-10 bg-gray-200 text-black shadow-lg rounded-lg px-4 w-40 overflow-hidden ${logged ? "" : "blur-md"}`}
@@ -132,7 +129,7 @@ export default function Conteudo() {
                                     initial="hidden"
                                     animate={sideContentOpen ? 'hidden' : 'show'}
                                     exit="hidden"
-                                    className={`flex flex-col justify-between h-full w-full pt-2 pointer-events-auto z-10 ${sideContentOpen ? 'overflow-hidden' : ''}`}
+                                    className={`flex flex-col gap-5 h-full w-full pt-2 pointer-events-auto z-10 ${sideContentOpen ? 'overflow-hidden' : ''}`}
                                 >
                                     {Array.from({ length: pointsCount }).map((_, i) => {
                                         const isActive = i === activeIndex
@@ -285,7 +282,7 @@ export default function Conteudo() {
                         transition={{ duration: 0.2, ease: "easeInOut" }}
                         onClick={() => { setSideOpen(!sideOpen) }} className={`cursor-pointer z-10 text-white bg-gradient-to-bl from-[#003550] to-[#003550]  w-7 h-10  rounded-r-full shadow-custom items-center flex justify-center  `}>
                         <span
-                            className={`transition-all duration-200  pi cursor-pointer pi-angle-right ` + (sideOpen ? " rotate-180" : "")}
+                            className={`absolute transition-all duration-200  pi cursor-pointer pi-angle-right ` + (sideOpen ? " rotate-180" : "")}
                         ></span>
                     </motion.div>
                 </motion.div>
@@ -302,11 +299,11 @@ export default function Conteudo() {
                         }
                         <div
                             key={content.title.text}
-                            className={`w-full overflow-y-auto h-full flex flex-col items-center pt-16 relative ${logged ? "" : "blur-md"}`}>
+                            className={`w-full overflow-y-auto h-full flex flex-col items-center ${logged ? "" : "blur-md"}`}>
 
                             <ContentComponent sectionRefs={sectionRefs} content={content} />
-                            <div className="w-full h-12 py-24">
-                                <div className="flex justify-center items-center gap-10 h-full">
+                            <div className="w-full h-12 py-3 pb-5">
+                                <div className="z-10 flex justify-center items-center gap-10 h-full">
                                     {contents[contents.findIndex(c => c.title.text === content.title.text) - 1] && (
                                         <motion.div
                                             variants={itemVariants}

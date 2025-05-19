@@ -15,9 +15,15 @@ interface ContentComponentProps {
     sectionRefs: React.MutableRefObject<Array<HTMLElement | null>>
 }
 
+interface ModalInfo {
+    id: number;
+    correct: boolean;
+    answer: string;
+}
+
 export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps) => {
     const [showModal, setShowModal] = useState(false)
-    const [correct, setCorrect] = useState(false)
+    const [modals, setModals] = useState<ModalInfo[]>([]);
     const itemVariants = {
         hidden: { y: 10, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
@@ -35,24 +41,57 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
     }, [])
 
     const validateAnswer = () => {
-        const correctAnswer = content.exercises[0].options.find((item: any) => item.correct === true)
-        const correctBoll = correctAnswer?.text === answer
-        setShowModal(true)
-        setCorrect(correctBoll)
-    }
+        const correctAnswer = content?.exercises?.[0]?.options?.find((item: any) => item.correct);
+        const isCorrect = correctAnswer?.text === answer;
 
+        const newModal = {
+            id: Date.now(),
+            correct: isCorrect,
+            answer: answer,
+        };
 
+        setModals((prev) => [...prev, newModal]);
+
+        setTimeout(() => {
+            setModals((prev) => prev.filter((modal) => modal.id !== newModal.id));
+        }, 4000);
+
+    };
+
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+        if (showModal) {
+            timeout = setTimeout(() => {
+                setShowModal(false);
+                setAnswer(null);
+            }, 4000);
+        }
+
+        return () => clearTimeout(timeout);
+    }, [showModal]);
 
     return (
         <>
             <div id="image" className="relative bg-black w-full h-full p-30">
                 <Image src={content.thumb} alt={content.title.text} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
-            <div className="fixed w-[30%] h-[5%] z-10 flex justify-center bottom-0">
-                {showModal && (
-                    AnswerModalComponent({ correct: correct, answer: answer })
-                )}
-            </div>
+            <motion.div
+                className={`py-2 fixed h-full w-[25%] flex flex-col gap-5 justify-end ${modals.length > 0 ? "z-20" : "-z-10"}`}>
+                <AnimatePresence>
+                    {modals.map((modal) => (
+                        <motion.div
+                            key={modal.id}
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "7%", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="w-full flex flex-col justify-center items-center gap-3 overflow-hidden"
+                        >
+                            <AnswerModalComponent correct={modal.correct} answer={modal.answer} />
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+            </motion.div>
             <div className={`relative flex flex-col justify-center items-start w-full  max-w-[75vw] `}>
                 <motion.div
                     ref={el => { if (el) sectionRefs.current[0] = el }}
@@ -110,7 +149,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                 <span className="text-5xl">{content.exercises[0].title}</span>
                                 <span className="text-2xl">{content.exercises[0].content}</span>
                                 <div className="flex flex-col gap-10 relative">
-                                    {/* <div className="flex flex-col gap-1">
+                                    <div className="flex flex-col gap-1">
                                         {content.exercises[0].options.map((item: any, index: number) => (
                                             <label key={index} className="flex items-center gap-4 cursor-pointer w-fit">
                                                 <input className="peer hidden" onClick={(e) => setAnswer(e.currentTarget.value)} type="radio" name="answer" value={item.text} />
@@ -120,7 +159,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                                 <span className="text-2xl">{item.text}</span>
                                             </label>
                                         ))}
-                                    </div> */}
+                                    </div>
                                     <motion.div
                                         variants={itemVariants}
                                         onClick={() => validateAnswer()}
@@ -138,12 +177,8 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                             </div>
                         </motion.div>
                     )
-
                 }
-                
             </div>
-
         </>
-
     )
 }
