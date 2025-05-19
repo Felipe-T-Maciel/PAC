@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
+import { AnswerModalComponent } from "./components/AnswerModal/AnswerModalComponent"
 
 interface ContentComponentProps {
     content: {
@@ -15,12 +16,13 @@ interface ContentComponentProps {
 }
 
 export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps) => {
+    const [showModal, setShowModal] = useState(false)
+    const [correct, setCorrect] = useState(false)
     const itemVariants = {
         hidden: { y: 10, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
     }
 
-    const [logged, setLogged] = useState(false)
     const [answer, setAnswer] = useState<any>(null)
 
     useEffect(() => {
@@ -32,19 +34,26 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
 
     }, [])
 
+    const validateAnswer = () => {
+        const correctAnswer = content.exercises[0].options.find((item: any) => item.correct === true)
+        const correctBoll = correctAnswer?.text === answer
+        setShowModal(true)
+        setCorrect(correctBoll)
+    }
+
+
+
     return (
         <>
-            {
-                !logged && (
-                    <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-                        <span onClick={() => { setLogged(true) }} className="bg-white p-7 text-3xl z-20 rounded-2xl shadow-2xl text-black">Faça login para acessar o conteúdo</span>
-                    </div>
-                )
-            }
             <div id="image" className="relative bg-black w-full h-full p-30">
                 <Image src={content.thumb} alt={content.title.text} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
-            <div className={`relative flex flex-col justify-center items-start w-full  max-w-[75vw] ` + (logged ? "" : "blur-md")}>
+            <div className="fixed w-[30%] h-[5%] z-10 flex justify-center bottom-0">
+                {showModal && (
+                    AnswerModalComponent({ correct: correct, answer: answer })
+                )}
+            </div>
+            <div className={`relative flex flex-col justify-center items-start w-full  max-w-[75vw] `}>
                 <motion.div
                     ref={el => { if (el) sectionRefs.current[0] = el }}
                     variants={itemVariants}
@@ -76,12 +85,12 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                         variants={itemVariants}
                         initial="hidden"
                         animate="show"
-                        className="py-16"
+                        className="py-16 w-full"
                     >
                         <h2 className="text-5xl mb-4">{sub.text}</h2>
                         <p className="text-2xl mb-6">{sub.content}</p>
                         {sub.image[0] && (
-                            <div className="w-full h-60 relative mb-6">
+                            <div className="flex justify-center w-full h-60 relative mb-6">
                                 <Image src={sub.image} fill alt="" className="object-cover rounded-xl shadow-lg" />
                             </div>
                         )}
@@ -101,7 +110,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                 <span className="text-5xl">{content.exercises[0].title}</span>
                                 <span className="text-2xl">{content.exercises[0].content}</span>
                                 <div className="flex flex-col gap-10 relative">
-                                    <div className="flex flex-col gap-1">
+                                    {/* <div className="flex flex-col gap-1">
                                         {content.exercises[0].options.map((item: any, index: number) => (
                                             <label key={index} className="flex items-center gap-4 cursor-pointer w-fit">
                                                 <input className="peer hidden" onClick={(e) => setAnswer(e.currentTarget.value)} type="radio" name="answer" value={item.text} />
@@ -111,9 +120,10 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                                 <span className="text-2xl">{item.text}</span>
                                             </label>
                                         ))}
-                                    </div>
+                                    </div> */}
                                     <motion.div
                                         variants={itemVariants}
+                                        onClick={() => validateAnswer()}
                                         whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
                                         whileTap={{ scale: 0.95 }}
                                         className="
@@ -128,8 +138,12 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                             </div>
                         </motion.div>
                     )
+
                 }
+                
             </div>
+
         </>
+
     )
 }

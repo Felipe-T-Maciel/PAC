@@ -20,6 +20,8 @@ export default function Conteudo() {
     const sectionRefs = useRef<(HTMLElement | null)[]>([])
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [sideContentOpen, setSideContentOpen] = useState(false);
+    const [logged, setLogged] = useState(false)
+
     const [content, setContent] = useState<Content>({
         thumb: "",
         title: {
@@ -34,6 +36,10 @@ export default function Conteudo() {
         }],
         exercises: [],
     });
+
+    const pointsCount = 1
+        + (content.subtitles?.length ?? 0)
+        + (content.exercises?.length ?? 0)
 
     useEffect(() => {
         document.body.getBoundingClientRect();
@@ -86,10 +92,16 @@ export default function Conteudo() {
         scrollToSection(0);
     }, [content]);
 
+    const changePageButton = (option: "next" | "back") => {
+        const idx = contents.findIndex(c => c.title.text === content.title.text);
+        const newIdx = option === "next" ? idx + 1 : idx - 1;
+        setContent(contents[newIdx]);
+        setActiveIndex(0);           // define o primeiro como ativo
+        sectionRefs.current = [];    // opcional: zera as refs pra não segurar elementos antigos
+        scrollToSection(0);
+    }
 
-    const pointsCount = 1
-        + (content.subtitles?.length ?? 0)
-        + (content.exercises?.length ?? 0)
+
     return (
         <>
             <main className="h-full w-full relative flex overflow-hidden">
@@ -97,12 +109,12 @@ export default function Conteudo() {
                     <AnimatePresence>
                         {content && (
                             <motion.div
-                                key="nav-sidebar"
-                                initial={{ height: 40, opacity: 0 }}
-                                animate={{ height: sideContentOpen ? 40 : 200, opacity: 1 }}
-                                exit={{ height: 40, opacity: 0 }}
+                                key={content.title.text}
+                                initial={{ height: 80, opacity: 0 }}
+                                animate={{ height: sideContentOpen ? 80 : 220, opacity: 1 }}
+                                exit={{ height: 80, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                className="fixed right-8 top-1/5 flex flex-col items-center z-10 bg-gray-200 text-black shadow-lg rounded-lg px-4 w-40 overflow-hidden"
+                                className={`fixed right-8 top-1/5 flex flex-col items-center z-10 bg-gray-200 text-black shadow-lg rounded-lg px-4 w-40 overflow-hidden ${logged ? "" : "blur-md"}`}
                             >
                                 <motion.div
                                     initial={{ height: '80%' }}
@@ -111,7 +123,7 @@ export default function Conteudo() {
                                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                                     className="w-1 bg-gray-300 absolute right-5.5 rounded-b-lg"
                                 />
-
+                                <span className="py-2">Índice</span>
                                 <motion.div
                                     variants={{
                                         hidden: { opacity: 0, y: -10 },
@@ -153,14 +165,14 @@ export default function Conteudo() {
                                 </motion.div>
 
                                 <motion.div
-                                    className="flex justify-center items-center py-3"
+                                    className="flex justify-center items-center pt-2 "
                                     initial={{ rotate: 0 }}
                                     animate={{ rotate: sideContentOpen ? 180 : 0 }}
-                                    transition={{ duration: 0.2}}
+                                    transition={{ duration: 0.2 }}
                                 >
                                     <span
                                         onClick={() => setSideContentOpen(!sideContentOpen)}
-                                        className="pi pi-angle-up cursor-pointer transition-all duration-200"
+                                        className="pi pi-angle-up cursor-pointer transition-all duration-200 h-fit"
                                     />
                                 </motion.div>
                             </motion.div>
@@ -280,12 +292,51 @@ export default function Conteudo() {
 
 
                 {content.title.text ? (
-                    <div
-                        key={content.title.text}
-                        className="w-full overflow-y-auto h-full flex flex-col items-center pt-16">
+                    <>
+                        {
+                            !logged && (
+                                <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+                                    <span onClick={() => { setLogged(true) }} className="bg-white p-7 text-3xl z-20 rounded-2xl shadow-2xl text-black">Faça login para acessar o conteúdo</span>
+                                </div>
+                            )
+                        }
+                        <div
+                            key={content.title.text}
+                            className={`w-full overflow-y-auto h-full flex flex-col items-center pt-16 relative ${logged ? "" : "blur-md"}`}>
 
-                        <ContentComponent sectionRefs={sectionRefs} content={content} />
-                    </div>
+                            <ContentComponent sectionRefs={sectionRefs} content={content} />
+                            <div className="w-full h-12 py-24">
+                                <div className="flex justify-center items-center gap-10 h-full">
+                                    {contents[contents.findIndex(c => c.title.text === content.title.text) - 1] && (
+                                        <motion.div
+                                            variants={itemVariants}
+                                            onClick={() => changePageButton("back")}
+                                            whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
+                                            whileTap={{ scale: 0.95 }}
+                                            className="
+                                                    shadow-custom cursor-pointer px-6 py-2 rounded-md font-medium
+                                                    bg-gradient-to-br from-[#3E7B9A] via-[#003550] to-[#003550]
+                                                    bg-[length:200%_100%] text-white w-34 text-center
+                                                  ">Voltar
+                                        </motion.div>
+                                    )}
+                                    {contents[contents.findIndex(c => c.title.text === content.title.text) + 1] && (
+                                        <motion.div
+                                            variants={itemVariants}
+                                            onClick={() => changePageButton("next")}
+                                            whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
+                                            whileTap={{ scale: 0.95 }}
+                                            className="
+                                                    shadow-custom cursor-pointer px-6 py-2 rounded-md font-medium
+                                                    bg-gradient-to-br from-[#3E7B9A] via-[#003550] to-[#003550]
+                                                    bg-[length:200%_100%] text-white w-34 text-center
+                                                  ">Próximo
+                                        </motion.div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </>
                 ) : (
                     <AnimatePresence>
 
