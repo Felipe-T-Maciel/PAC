@@ -1,61 +1,34 @@
+//
+// Adicionar conteúdo de cada página junto com as imagens
+//
+
 export const contents = [
     {
-        "thumb": "/teste.jpeg",
+        "thumb": "/",  //capa de fundo
         "title": {
-            "text": "title ",
-            "image": "/teste.jpeg",
-            "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
+            "text": " ", //titulo do conteudo
+            "image": "/", // imagem dps do texto do conteudo
+            "content": [""] // texto do conteudo
         },
         "subtitles": [{
-            "text": "subtitle1 ",
-            "image": "/teste.jpeg",
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit am"
+            "text": "", // subtitulo do conteudo (se houver, precisa de um espaço no final da string)
+            "image": "/", // imagem dps do texto do conteudo
+            "content": "" // texto do conteudo
         }, {
-            "text": "subtitle2 ",
-            "image": "/content.png",
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit am"
+            "text": "",
+            "image": "",
+            "content": ""
         }],
         "exercises": [{
-            "title": "Test 1 ",
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labo incididunt ut labore e incididunt ut labore e incididunt ut labore e incididunt ut labore e incididunt ut labore ere et dolore magna aliqua. Lorem ipsum dolor sit amet,Lorem consectetur adipiscing ",
-            "image": "/teste.jpeg",
+            "title": "",  // titulo do exercicio (se houver) (precisa de um espaço no final da string)
+            "content": "", // descritivo do exercicio
+            "image": "", // imagem dps do texto do exercicio (se houver)
             "options": [
-                { "text": "a", "correct": true },
-                { "text": "b", "correct": false },
-                { "text": "c", "correct": false },
-                { "text": "d", "correct": false }
+                { "text": "", "correct": true }, // text - texto da opcao, correct - se a opcao esta correta ou nao (true ou false)
+                { "text": "", "correct": false },
+                { "text": "", "correct": false },
+                { "text": "", "correct": false }
             ]
         }]
     },
-    {
-        "thumb": "/teste.jpeg",
-        "title": {
-            "text": "title2 ",
-            "image": "/teste.jpeg",
-            "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
-        },
-        "subtitles": [{
-            "text": "subtitle1 ",
-            "image": "/teste.jpeg",
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit am"
-        }],
-        "exercises": [],
-
-    },
-
-    {
-        "thumb": "/teste.jpeg",
-        "title": {
-            "text": "title3 ",
-            "image": "/teste.jpeg",
-            "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."]
-        },
-        "subtitles": [{
-            "text": "subtitle1 ",
-            "image": "/teste.jpeg",
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit am"
-        }],
-        "exercises": [],
-
-    }
 ];
