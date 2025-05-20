@@ -22,14 +22,14 @@ export default function Conteudo() {
     const [logged, setLogged] = useState(false)
     const [screenSize, setScreenSize] = useState<number>(0);
 
-    
+
     const getSidebarWidth = () => {
         if (screenSize < 1024) {
             return false
         }
         return true
     };
-    
+
     useEffect(() => {
         const handleResize = () => setScreenSize(window.innerWidth);
         window.addEventListener("resize", handleResize);
@@ -195,15 +195,15 @@ export default function Conteudo() {
                 )}
 
                 <motion.div
-                    initial={{ width: "2%" }}
-                    animate={{ width: sideOpen ? "16rem" : "2rem" }}
-                    className={`flex  items-center`}>
+                    initial={{ width: "2rem" }}
+                    animate={{ width: sideOpen ? "16rem" : "0rem" }}
+                    className={`flex items-center absolute left-0 lg:relative z-20 h-full`}>
                     <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: sideOpen ? "100%" : 0 }}
                         exit={{ width: 0 }}
                         transition={{ duration: 0.2, ease: "easeInOut" }}
-                        className={`left-0 top-0 h-full bg-gradient-to-bl from-[#003550] via-[#003550] to-[#3E7B9A] text-white relative`}
+                        className={`left-0 top-0 h-full bg-gradient-to-bl from-[#003550] via-[#003550] to-[#3E7B9A] text-white `}
                         style={{ display: sideOpen ? "block " : "" }}
                     >
                         {sideOpen && (
@@ -294,9 +294,9 @@ export default function Conteudo() {
                     </motion.div>
                     <motion.div
                         initial={{ left: 0 }}
-                        animate={{ left: sideOpen ? "15.5rem" : 0 }}
+                        animate={{ left: sideOpen ? "" : 0 }}
                         transition={{ duration: 0.2, ease: "easeInOut" }}
-                        onClick={() => { setSideOpen(!sideOpen) }} className={`cursor-pointer z-10 text-white bg-gradient-to-bl from-[#003550] to-[#003550]  w-7 h-10  rounded-r-full shadow-custom items-center flex justify-center  `}>
+                        onClick={() => { setSideOpen(!sideOpen) }} className={`absolute -right-7 cursor-pointer z-10 text-white bg-gradient-to-bl from-[#003550] to-[#003550]  w-7 h-10  rounded-r-full shadow-custom items-center flex justify-center  `}>
                         <span
                             className={`absolute transition-all duration-200  pi cursor-pointer pi-angle-right ` + (sideOpen ? " rotate-180" : "")}
                         ></span>
@@ -317,7 +317,7 @@ export default function Conteudo() {
                             className={`w-full overflow-y-auto h-full flex flex-col items-center ${logged ? "" : "blur-md"}`}>
 
                             <ContentComponent sectionRefs={sectionRefs} content={content} />
-                            <div className="w-full h-12 py-3 pb-5">
+                            <div className="w-full h-12 py-3 pb-12">
                                 <div className="z-10 flex justify-center items-center gap-10 h-full">
                                     {contents[contents.findIndex(c => c.title.text === content.title.text) - 1] && (
                                         <motion.div
@@ -361,7 +361,7 @@ export default function Conteudo() {
                             className="flex w-full h-full justify-center items-center gap-34 py-36 px-4 md-px-0">
                             <motion.span
                                 style={{ backgroundSize: '300% 300%' }}
-                                className="text-xl md:text-2xl text-center bg-gradient-to-r from-[#3E7B9A] via-[#71C9F5] to-[#003550] bg-clip-text text-transparent inline-block"
+                                className="text-xl md:text-2xl text-center bg-gradient-to-r from-[#3E7B9A] via-[#71C9F5] to-[#003550] bg-clip-text text-transparent inline-block "
                                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                                 transition={{ duration: 4, ease: 'easeIn', repeat: Infinity }}
                             >Nenhum conteúdo selecionado, acesse a aba lateral para navegar pelos conteúdos disponíveis.</motion.span>

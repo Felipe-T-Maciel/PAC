@@ -76,7 +76,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                 <Image src={content.thumb} alt={content.title.text} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <motion.div
-                className={`py-2 fixed h-full w-[25%] flex flex-col gap-5 justify-end  ${modals.length > 0 ? "z-20" : "-z-10"}`}>
+                className={`py-2 fixed h-full w-[80%] md:w-[25%] flex flex-col gap-5 justify-end  ${modals.length > 0 ? "z-20" : "-z-10"}`}>
                 <AnimatePresence>
                     {modals.map((modal) => (
                         <motion.div
@@ -103,7 +103,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                         data-scroll-id="title">
                         <div className="flex flex-col">
                             <span className="text-6xl mb-7">{content.title.text}</span>
-                            <span className="text-2xl mb-10">{content.title.content[0]}</span>
+                            <span className="text-2xl mb-10 text-justify">{content.title.content[0]}</span>
                         </div>
                     </motion.div>
                     {content.title.image != null && (
@@ -118,26 +118,30 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                         </div>
                     )}
                 </div>
+                <div className="w-full bg-gray-300 h-0.5 my-2 shadow-2xl rounded-lg"></div>
+
                 {content.subtitles.map((sub, index) => (
+                    <>
+                        <motion.section
+                            key={index}
+                            ref={el => { if (el) sectionRefs.current[index + 1] = el }}
+                            variants={itemVariants}
+                            initial="hidden"
+                            animate="show"
+                            className="py-16 w-full"
+                        >
+                            <h2 className="text-5xl mb-7">{sub.text}</h2>
+                            <p className="text-2xl mb-10 text-justify">{sub.content}</p>
+                            {sub.image[0] && (
+                                <div className="flex justify-center w-full h-60 relative">
+                                    <Image src={sub.image} fill alt="" className="object-cover rounded-xl shadow-lg" />
+                                </div>
+                            )}
 
-                    <motion.section
-                        key={index}
-                        ref={el => { if (el) sectionRefs.current[index + 1] = el }}
-                        variants={itemVariants}
-                        initial="hidden"
-                        animate="show"
-                        className="py-16 w-full"
-                    >
-                        <h2 className="text-5xl mb-7">{sub.text}</h2>
-                        <p className="text-2xl mb-10">{sub.content}</p>
-                        {sub.image[0] && (
-                            <div className="flex justify-center w-full h-60 relative">
-                                <Image src={sub.image} fill alt="" className="object-cover rounded-xl shadow-lg" />
-                            </div>
-                        )}
-                    </motion.section>
+                        </motion.section>
+                        <div className="w-full bg-gray-300 h-0.5 my-2 shadow-2xl rounded-lg"></div>
+                    </>
                 ))}
-
                 {
                     content.exercises != null && content.exercises.length > 0 && (
                         <motion.div
@@ -149,7 +153,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                             data-scroll-id="ex1">
                             <div className="flex flex-col">
                                 <span className="text-5xl mb-7">{content.exercises[0].title}</span>
-                                <span className="text-2xl mb-10">{content.exercises[0].content}</span>
+                                <span className="text-2xl mb-10 text-justify">{content.exercises[0].content}</span>
                                 <div className="flex flex-row lg:flex-col justify-between lg:justify-normal items-end lg:items-start gap-10 relative">
                                     <div className="flex flex-col gap-1">
                                         {content.exercises[0].options.map((item: any, index: number) => (
@@ -158,7 +162,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                                 <div className="w-5 h-5 rounded-full border-2 bg-white border-gray-400 peer-checked:bg-blue-500 peer-checked:border-blue-700 transition-all duration-300 flex items-center justify-center">
                                                     <div className="w-2.5 h-2.5 bg-white rounded-full scale-0 peer-checked:scale-100 transition-transform"></div>
                                                 </div>
-                                                <span className="text-2xl">{item.text}</span>
+                                                <span className="text-2xl ">{item.text}</span>
                                             </label>
                                         ))}
                                     </div>
@@ -177,11 +181,11 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                     </motion.div>
                                 </div>
                             </div>
+                            <div className="w-full bg-gray-300 h-0.5 mt-10 -mb-6 shadow-2xl rounded-lg"></div>
                         </motion.div>
                     )
                 }
             </div>
-            <div className="w-full bg-gray-400 h-1"></div>
         </>
     )
 }
