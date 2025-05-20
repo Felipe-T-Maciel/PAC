@@ -1,9 +1,8 @@
 interface ContentComponentProps {
-    correct: boolean,
-    answer: string,
+    correct: boolean
 }
 
-export const AnswerModalComponent = ({ correct, answer }: ContentComponentProps) => {
+export const AnswerModalComponent = ({ correct }: ContentComponentProps) => {
     return (
         <>
             {

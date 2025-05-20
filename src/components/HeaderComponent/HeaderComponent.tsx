@@ -22,7 +22,6 @@ export const HeaderComponent = () => {
 
     const handleTheme = () => {
         const htmlElement = document.documentElement;
-        console.log("aqui");
 
         if (htmlElement.classList.contains('dark')) {
             htmlElement.classList.remove('dark');

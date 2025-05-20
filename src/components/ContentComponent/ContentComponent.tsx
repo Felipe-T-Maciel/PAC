@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { AnswerModalComponent } from "./components/AnswerModal/AnswerModalComponent"
 
 interface ContentComponentProps {
@@ -30,15 +30,6 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
     }
 
     const [answer, setAnswer] = useState<any>(null)
-
-    useEffect(() => {
-        console.log("Answer: ", answer);
-    }, [answer])
-
-    useEffect(() => {
-        console.log(content.subtitles);
-
-    }, [])
 
     const validateAnswer = () => {
         const correctAnswer = content?.exercises?.[0]?.options?.find((item: any) => item.correct);
@@ -87,7 +78,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                             transition={{ duration: 0.3 }}
                             className="w-full flex flex-col justify-center items-center gap-3 overflow-hidden"
                         >
-                            <AnswerModalComponent correct={modal.correct} answer={modal.answer} />
+                            <AnswerModalComponent correct={modal.correct} />
                         </motion.div>
                     ))}
                 </AnimatePresence>
