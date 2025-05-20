@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { contents } from "@/src/util/content";
-import { ContentComponent } from "@/src/components/ContentComponent/ContentComponent";
-
+import { ContentComponent } from "@/src/components/ContentComponent";
 
 interface Content {
     thumb: string
@@ -22,20 +21,12 @@ export default function Conteudo() {
     const [logged, setLogged] = useState(false)
     const [screenSize, setScreenSize] = useState<number>(0);
 
-
     const getSidebarWidth = () => {
         if (screenSize < 1024) {
             return false
         }
         return true
     };
-
-    useEffect(() => {
-        const handleResize = () => setScreenSize(window.innerWidth);
-        window.addEventListener("resize", handleResize);
-        handleResize();
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
 
     const [content, setContent] = useState<Content>({
         thumb: "",
@@ -56,39 +47,10 @@ export default function Conteudo() {
         + (content.subtitles?.length ?? 0)
         + (content.exercises?.length ?? 0)
 
-    useEffect(() => {
-        document.body.getBoundingClientRect();
-    }, [content]);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const middleY = window.innerHeight / 2;
-
-            const newIndex = sectionRefs.current.findIndex((el) => {
-                if (!el) return false;
-                const rect = el.getBoundingClientRect();
-                return rect.top <= middleY && rect.bottom >= middleY;
-            });
-
-            if (newIndex !== -1 && newIndex !== activeIndex) {
-                setActiveIndex(newIndex);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        handleScroll();
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [activeIndex]);
-
-
     const itemVariants = {
         hidden: { y: -10, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
     }
-
 
     const toggleExpand = (index: number) => {
         setExpandedIndexes(prev =>
@@ -103,16 +65,48 @@ export default function Conteudo() {
         setActiveIndex(index);
     };
 
-    useEffect(() => {
-        scrollToSection(-1);
-    }, [content]);
-
     const changePageButton = (option: "next" | "back") => {
         const index = contents.findIndex(c => c.title.text === content.title.text);
         const newIndex = option === "next" ? index + 1 : index - 1;
         setContent(contents[newIndex]);
         setActiveIndex(null);
     }
+
+    useEffect(() => {
+        const handleResize = () => setScreenSize(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    useEffect(() => {
+        scrollToSection(-1);
+    }, [content]);
+
+    useEffect(() => {
+        document.body.getBoundingClientRect();
+    }, [content]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const middleY = window.innerHeight / 2;
+            const newIndex = sectionRefs.current.findIndex((el) => {
+                if (!el) return false;
+                const rect = el.getBoundingClientRect();
+                return rect.top <= middleY && rect.bottom >= middleY;
+            });
+            if (newIndex !== -1 && newIndex !== activeIndex) {
+                setActiveIndex(newIndex);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [activeIndex]);
 
     return (
         <>
@@ -353,7 +347,6 @@ export default function Conteudo() {
                     </>
                 ) : (
                     <AnimatePresence>
-
                         <motion.div
                             key="empty"
                             initial="hidden"

@@ -13,7 +13,6 @@ export const AnswerModalComponent = ({ correct }: ContentComponentProps) => {
                             <span className="text-xl">Resposta correta, Parabéns!</span>
                         </div>
                     </div>
-
                 ) : (
                     <div className="text-white bg-red-600 w-full h-full shadow-2xl flex flex-col justify-center items-center rounded-lg overflow-hidden">
                         <div className="flex justify-center items-center gap-10">

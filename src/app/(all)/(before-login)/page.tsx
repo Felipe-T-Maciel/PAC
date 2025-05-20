@@ -12,10 +12,12 @@ export default function HomePage() {
         hidden: {},
         show: { transition: { staggerChildren: 0.2 } },
     };
+
     const itemVariants = {
         hidden: { y: 20, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
     };
+
     const section2Ref = React.useRef<HTMLDivElement>(null);
 
 
@@ -94,9 +96,7 @@ export default function HomePage() {
                     </div>
                 </motion.div>
             </section>
-
             <section ref={section2Ref} className="h-screen snap-start flex items-center justify-center">
-
                 <div className="flex flex-col items-center justify-center gap-20">
                     <div className="flex flex-col md:flex-row items-center gap-4 z-10">
                         <motion.div variants={itemVariants} className="flex flex-col justify-between md:justify-around w-96 h-44 md:h-52 gap-4">

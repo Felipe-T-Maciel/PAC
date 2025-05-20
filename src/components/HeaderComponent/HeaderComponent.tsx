@@ -1,12 +1,11 @@
 'use client'
 
-import { useRouter } from "next/navigation";
-import Image from "next/image";
 import 'primeicons/primeicons.css';
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const HeaderComponent = () => {
-
     const router = useRouter();
     const [theme, setTheme] = useState<string>('light');
 
@@ -53,7 +52,6 @@ export const HeaderComponent = () => {
                         <span style={{ fontSize: "1rem" }} onClick={() => handleTheme()} className={`cursor-pointer   ${theme == 'dark' ? "pi pi-moon" : "pi pi-sun"}`}></span>
                     </div>
                 </div>
-
             </div>
         </>
     );

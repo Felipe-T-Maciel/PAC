@@ -1,9 +1,9 @@
 'use client'
 
-import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
+import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { AnswerModalComponent } from "./components/AnswerModal/AnswerModalComponent"
+import { AnswerModalComponent } from "@/src/components/ContentComponent/components/AnswerModal"
 
 interface ContentComponentProps {
     content: {
@@ -24,25 +24,22 @@ interface ModalInfo {
 export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps) => {
     const [showModal, setShowModal] = useState(false)
     const [modals, setModals] = useState<ModalInfo[]>([]);
+    const [answer, setAnswer] = useState<any>(null)
     const itemVariants = {
         hidden: { y: 10, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
     }
 
-    const [answer, setAnswer] = useState<any>(null)
 
     const validateAnswer = () => {
         const correctAnswer = content?.exercises?.[0]?.options?.find((item: any) => item.correct);
         const isCorrect = correctAnswer?.text === answer;
-
         const newModal = {
             id: Date.now(),
             correct: isCorrect,
             answer: answer,
         };
-
         setModals((prev) => [...prev, newModal]);
-
         setTimeout(() => {
             setModals((prev) => prev.filter((modal) => modal.id !== newModal.id));
         }, 4000);
@@ -57,7 +54,6 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                 setAnswer(null);
             }, 4000);
         }
-
         return () => clearTimeout(timeout);
     }, [showModal]);
 
@@ -128,7 +124,6 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                     <Image src={sub.image} fill alt="" className="object-cover rounded-xl shadow-lg" />
                                 </div>
                             )}
-
                         </motion.section>
                         <div className="w-full bg-gray-300 h-0.5 my-2 shadow-2xl rounded-lg"></div>
                     </div>

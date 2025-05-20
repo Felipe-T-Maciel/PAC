@@ -13,11 +13,6 @@ pnpm dev
 # or
 bun dev
 
-Criar branch pessoal para mudanças e testes:
-git checkout -b Nome_da_nova_branch
-
-Entrar em uma branch já existente:
-git checkout nome_branch
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
