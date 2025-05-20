@@ -20,6 +20,22 @@ export default function Conteudo() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [sideContentOpen, setSideContentOpen] = useState(false);
     const [logged, setLogged] = useState(false)
+    const [screenSize, setScreenSize] = useState<number>(0);
+
+    
+    const getSidebarWidth = () => {
+        if (screenSize < 1024) {
+            return false
+        }
+        return true
+    };
+    
+    useEffect(() => {
+        const handleResize = () => setScreenSize(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const [content, setContent] = useState<Content>({
         thumb: "",
@@ -101,7 +117,7 @@ export default function Conteudo() {
     return (
         <>
             <main className="h-full w-full relative flex overflow-hidden">
-                {content?.title.text && (
+                {content?.title.text && getSidebarWidth() && (
                     <AnimatePresence>
                         {content && (
                             <motion.div
@@ -180,7 +196,7 @@ export default function Conteudo() {
 
                 <motion.div
                     initial={{ width: "2%" }}
-                    animate={{ width: sideOpen ? "18%" : "2%" }}
+                    animate={{ width: sideOpen ? "16rem" : "2rem" }}
                     className={`flex  items-center`}>
                     <motion.div
                         initial={{ width: 0 }}
@@ -287,7 +303,6 @@ export default function Conteudo() {
                     </motion.div>
                 </motion.div>
 
-
                 {content.title.text ? (
                     <>
                         {
@@ -343,10 +358,10 @@ export default function Conteudo() {
                             animate="show"
                             exit="hidden"
                             variants={itemVariants}
-                            className="flex w-full h-full justify-center items-center gap-34 py-36">
+                            className="flex w-full h-full justify-center items-center gap-34 py-36 px-4 md-px-0">
                             <motion.span
                                 style={{ backgroundSize: '300% 300%' }}
-                                className="text-2xl bg-gradient-to-r from-[#3E7B9A] via-[#71C9F5] to-[#003550] bg-clip-text text-transparent inline-block"
+                                className="text-xl md:text-2xl text-center bg-gradient-to-r from-[#3E7B9A] via-[#71C9F5] to-[#003550] bg-clip-text text-transparent inline-block"
                                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                                 transition={{ duration: 4, ease: 'easeIn', repeat: Infinity }}
                             >Nenhum conteúdo selecionado, acesse a aba lateral para navegar pelos conteúdos disponíveis.</motion.span>

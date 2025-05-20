@@ -76,7 +76,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                 <Image src={content.thumb} alt={content.title.text} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <motion.div
-                className={`py-2 fixed h-full w-[25%] flex flex-col gap-5 justify-end ${modals.length > 0 ? "z-20" : "-z-10"}`}>
+                className={`py-2 fixed h-full w-[25%] flex flex-col gap-5 justify-end  ${modals.length > 0 ? "z-20" : "-z-10"}`}>
                 <AnimatePresence>
                     {modals.map((modal) => (
                         <motion.div
@@ -93,29 +93,31 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                 </AnimatePresence>
             </motion.div>
             <div className={`relative flex flex-col justify-center items-start w-full  max-w-[75vw] `}>
-                <motion.div
-                    ref={el => { if (el) sectionRefs.current[0] = el }}
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate="show"
-                    className="flex flex-col py-16"
-                    data-scroll-id="title">
-                    <div className="flex flex-col gap-20">
-                        <span className="text-6xl">{content.title.text}</span>
-                        <span className="text-2xl">{content.title.content[0]}</span>
-                    </div>
-                </motion.div>
-                {content.title.image != null && (
-                    <div className="flex justify-center w-full">
-                        <motion.div
-                            variants={itemVariants}
-                            initial="hidden"
-                            animate="show"
-                            className="flex flex-col gap-20 rounded-xl shadow-2xl">
-                            <Image src={content.title.image} width={1000} height={30} alt="" className="rounded-xl" />
-                        </motion.div>
-                    </div>
-                )}
+                <div className="py-16">
+                    <motion.div
+                        ref={el => { if (el) sectionRefs.current[0] = el }}
+                        variants={itemVariants}
+                        initial="hidden"
+                        animate="show"
+                        className="flex flex-col "
+                        data-scroll-id="title">
+                        <div className="flex flex-col">
+                            <span className="text-6xl mb-7">{content.title.text}</span>
+                            <span className="text-2xl mb-10">{content.title.content[0]}</span>
+                        </div>
+                    </motion.div>
+                    {content.title.image != null && (
+                        <div className="flex justify-center w-full">
+                            <motion.div
+                                variants={itemVariants}
+                                initial="hidden"
+                                animate="show"
+                                className="flex flex-col rounded-xl shadow-2xl">
+                                <Image src={content.title.image} width={1000} height={30} alt="" className="rounded-xl" />
+                            </motion.div>
+                        </div>
+                    )}
+                </div>
                 {content.subtitles.map((sub, index) => (
 
                     <motion.section
@@ -126,10 +128,10 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                         animate="show"
                         className="py-16 w-full"
                     >
-                        <h2 className="text-5xl mb-4">{sub.text}</h2>
-                        <p className="text-2xl mb-6">{sub.content}</p>
+                        <h2 className="text-5xl mb-7">{sub.text}</h2>
+                        <p className="text-2xl mb-10">{sub.content}</p>
                         {sub.image[0] && (
-                            <div className="flex justify-center w-full h-60 relative mb-6">
+                            <div className="flex justify-center w-full h-60 relative">
                                 <Image src={sub.image} fill alt="" className="object-cover rounded-xl shadow-lg" />
                             </div>
                         )}
@@ -143,12 +145,12 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                             ref={el => { if (el) sectionRefs.current[(content.subtitles?.length ?? 0) + 1] = el }}
                             initial="hidden"
                             animate="show"
-                            className="flex flex-col py-10 "
+                            className="flex flex-col py-16 "
                             data-scroll-id="ex1">
-                            <div className="flex flex-col gap-10">
-                                <span className="text-5xl">{content.exercises[0].title}</span>
-                                <span className="text-2xl">{content.exercises[0].content}</span>
-                                <div className="flex flex-col gap-10 relative">
+                            <div className="flex flex-col">
+                                <span className="text-5xl mb-7">{content.exercises[0].title}</span>
+                                <span className="text-2xl mb-10">{content.exercises[0].content}</span>
+                                <div className="flex flex-row lg:flex-col justify-between lg:justify-normal items-end lg:items-start gap-10 relative">
                                     <div className="flex flex-col gap-1">
                                         {content.exercises[0].options.map((item: any, index: number) => (
                                             <label key={index} className="flex items-center gap-4 cursor-pointer w-fit">
@@ -168,7 +170,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                         className="
                                                     shadow-custom cursor-pointer px-6 py-2 rounded-md font-medium
                                                     bg-gradient-to-br from-[#3E7B9A] via-[#003550] to-[#003550]
-                                                    bg-[length:200%_100%] text-white w-34 text-center
+                                                    bg-[length:200%_100%] text-white w-34 text-center h-10
                                                   "
                                     >
                                         Validar
@@ -179,6 +181,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                     )
                 }
             </div>
+            <div className="w-full bg-gray-400 h-1"></div>
         </>
     )
 }
