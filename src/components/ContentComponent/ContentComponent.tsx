@@ -121,9 +121,9 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                 <div className="w-full bg-gray-300 h-0.5 my-2 shadow-2xl rounded-lg"></div>
 
                 {content.subtitles.map((sub, index) => (
-                    <>
+                    <div key={index}>
                         <motion.section
-                            key={index}
+
                             ref={el => { if (el) sectionRefs.current[index + 1] = el }}
                             variants={itemVariants}
                             initial="hidden"
@@ -140,7 +140,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
 
                         </motion.section>
                         <div className="w-full bg-gray-300 h-0.5 my-2 shadow-2xl rounded-lg"></div>
-                    </>
+                    </div>
                 ))}
                 {
                     content.exercises != null && content.exercises.length > 0 && (

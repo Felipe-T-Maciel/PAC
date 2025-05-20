@@ -321,6 +321,7 @@ export default function Conteudo() {
                                 <div className="z-10 flex justify-center items-center gap-10 h-full">
                                     {contents[contents.findIndex(c => c.title.text === content.title.text) - 1] && (
                                         <motion.div
+                                            key={"back"}
                                             variants={itemVariants}
                                             onClick={() => changePageButton("back")}
                                             whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
@@ -334,6 +335,7 @@ export default function Conteudo() {
                                     )}
                                     {contents[contents.findIndex(c => c.title.text === content.title.text) + 1] && (
                                         <motion.div
+                                            key={"next"}
                                             variants={itemVariants}
                                             onClick={() => changePageButton("next")}
                                             whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
