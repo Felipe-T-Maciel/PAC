@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { UserProvider } from './Components/UserContext'
 import "./globals.css";
 
 
@@ -13,7 +14,9 @@ export default function RootLayout({
       <body
         className={`w-screen h-screen flex items-center justify-center`}
       >
-        {children}
+        <UserProvider>
+          {children}
+        </UserProvider>
       </body>
     </html> 
   );
