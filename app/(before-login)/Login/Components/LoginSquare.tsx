@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { useUser } from '../../../Components/UserContext';
 
@@ -8,25 +8,32 @@ export default function LoginSquare() {
     email: "",
     password: ""
   });
+  const [error, setError] = useState(false);
 
   const handleRegister = async () => {
-    const response = await fetch("http://127.0.0.1:8092/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    const data = await response.json();
-    console.log(data);
-    localStorage.setItem("access_token", data.access_token);
-    if (data.user.email != undefined) {
-      setUser({
-        email: data.user.email,
-        token: data.access_token,
-        img: data.img || "",
+    setError(false);
+    try {
+      const response = await fetch("http://127.0.0.1:8092/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
       });
-
+      const data = await response.json();
+      if (response.ok && data.user?.email) {
+        localStorage.setItem("access_token", data.access_token);
+        setUser({
+          email: data.user.email,
+          token: data.access_token,
+          img: data.img || "",
+        });
+      } else {
+        throw new Error("Invalid credentials");
+      }
+    } catch (err) {
+      console.error(err);
+      setError(true);
     }
   };
 
@@ -36,28 +43,45 @@ export default function LoginSquare() {
         <p className="font-semibold pt-2 text-2xl text-[#003550]">Acesse sua conta</p>
       </div>
       <div className="w-full h-full flex items-center flex-col gap-4">
-        <div className="w-fit h-[3rem] flex items-center p-2 rounded-md shadow-md">
+        <div
+          className={`w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md ${
+            error ? "border-2 border-red-500" : ""
+          }`}
+        >
           <input
             onChange={(event) => {
               setUserLogin({
                 ...user,
                 email: event.target.value
-              })
+              });
             }}
-            className="min-w-[17rem] outline-0 py-2" type="text" placeholder="E-mail" />
+            className="min-w-[17rem] outline-0 py-2"
+            type="text"
+            placeholder="E-mail"
+          />
           <i className="pi pi-user text-[#003550]"></i>
         </div>
-        <div className="w-fit h-[3rem] flex items-center p-2 rounded-md shadow-md">
+        <div
+          className={`w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md ${
+            error ? "border-2 border-red-500" : ""
+          }`}
+        >
           <input
             onChange={(event) => {
               setUserLogin({
                 ...user,
                 password: event.target.value
-              })
+              });
             }}
-            className="min-w-[17rem] outline-0 py-2" type="password" placeholder="Senha" />
+            className="min-w-[17rem] outline-0 py-2 "
+            type="password"
+            placeholder="Senha"
+          />
           <i className="pi pi-lock text-[#003550]"></i>
         </div>
+        {error && (
+          <p className="text-red-500 absolute bottom-[20%] text-sm">E-mail ou senha incorretos</p>
+        )}
         <motion.div
           onClick={handleRegister}
           whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
@@ -72,5 +96,5 @@ export default function LoginSquare() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

@@ -43,7 +43,6 @@ export default function LoginLayout({
       <head />
       <body
         className={`w-screen h-screen flex bg-cover bg-top items-center justify-center alata-regular`}
-        style={{ backgroundImage: bg }}
       > 
         {children}
       </body>

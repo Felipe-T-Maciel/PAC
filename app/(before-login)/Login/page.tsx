@@ -11,7 +11,7 @@ export default function Login() {
   const tabs = ["Login", "Register"];
   const { user, setUser } = useUser(); 
 
-  const [selectedTab, setSelectedTab] = useState<"Login" | "register">(tabs[0] as "Login" | "register");
+  const [selectedTab, setSelectedTab] = useState<"Login" | "Register">(tabs[0] as "Login" | "Register");
 
   const underline: React.CSSProperties = {
     position: "absolute",
@@ -96,8 +96,12 @@ export default function Login() {
   }, [user]);
 
   return (
+    <>
+    <img src="/back1.svg" alt="" className="absolute top-0 right-0 -z-10" />
+    <img src="/catolica logo login.svg" alt="" className="absolute top-10 left-2 md:left-10 -z-5" />
+    <img src="/back5 LOGIN.svg" alt="" className="absolute bottom-0 left-0 -z-10" />
     <motion.main
-      className="w-[35%] duration-200 bg-[#EDEDED] rounded-lg shadow-2xl"
+      className="w-[95%] md:w-[70%] lg:w-[55%] xl:w-[35%] 2xl:w-[20%] duration-200 bg-[#EDEDED] rounded-lg relative shadow-2xl"
       style={{ overflow: "hidden" }}
       animate={{ height: containerHeights[selectedTab] }} 
       transition={{ duration: 0.3 }}
@@ -113,7 +117,7 @@ export default function Login() {
                   backgroundColor: item === selectedTab ? "#eee" : "#eee0",
                 }}
                 style={tab}
-                onClick={() => setSelectedTab(item)}
+                onClick={() => setSelectedTab(item as "Login" | "Register")}
               >
                 {item}
                 {item === selectedTab && (
@@ -143,5 +147,6 @@ export default function Login() {
         </motion.div>
       </AnimatePresence>
     </motion.main>
+    </>
   );
 }

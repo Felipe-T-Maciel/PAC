@@ -41,7 +41,7 @@ export default function RegisterSquare() {
         <p className="font-semibold text-2xl text-[#003550]">Crie sua conta</p>
       </div>
       <div className="w-full h-full flex items-center flex-col gap-4">
-        <div className="w-fit h-[3rem] flex items-center p-2 rounded-md shadow-md">
+        <div className="w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md">
           <input onChange={(event)=>{
             setUserLogin({
               ...user,
@@ -50,7 +50,7 @@ export default function RegisterSquare() {
           }} className="min-w-[17rem] outline-0 py-2" type="text" placeholder="E-mail" />
           <i className="pi pi-user text-[#003550]"></i>
         </div>
-        <div className="w-fit h-[3rem] flex items-center p-2 rounded-md shadow-md">
+        <div className="w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md">
           <input onChange={(event)=>{
             setUserLogin({
               ...user,
@@ -60,7 +60,7 @@ export default function RegisterSquare() {
           className="min-w-[17rem] outline-0 py-2" type="password" placeholder="Senha" />
           <i className="pi pi-lock text-[#003550]"></i>
         </div>
-        <div className="w-fit h-[3rem] flex items-center p-2 rounded-md shadow-md">
+        <div className="w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md">
           <input 
           // onChange={(event)=>{
           //   setUser({
