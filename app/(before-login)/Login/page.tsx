@@ -8,10 +8,10 @@ import RegisterSquare from "./Components/RegisterSquare";
 import { useUser } from '../../Components/UserContext';
 
 export default function Login() {
-  const tabs = ["Login", "register"];
+  const tabs = ["Login", "Register"];
   const { user, setUser } = useUser(); 
 
-  const [selectedTab, setSelectedTab] = useState(tabs[0]);
+  const [selectedTab, setSelectedTab] = useState<"Login" | "register">(tabs[0] as "Login" | "register");
 
   const underline: React.CSSProperties = {
     position: "absolute",
@@ -22,17 +22,9 @@ export default function Login() {
     background: "#3E7B9A",
   };
 
-  const container: React.CSSProperties = {
-    width: 480,
-    height: "60vh",
-    maxHeight: 360,
-    borderRadius: 10,
-    background: "white",
-    overflow: "hidden",
-    boxShadow:
-      "0 1px 1px hsl(0deg 0% 0% / 0.075), 0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075), 0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075), 0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075), 0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075)",
-    display: "flex",
-    flexDirection: "column",
+  const containerHeights = {
+    Login: 340,
+    Register: 410,
   };
 
   const nav: React.CSSProperties = {
@@ -58,7 +50,7 @@ export default function Login() {
     position: "relative",
     background: "white",
     cursor: "pointer",
-    height: 24,
+    height: 34,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -89,11 +81,14 @@ export default function Login() {
     });
     const data = await response.json();
     console.log(data);
-    setUser({
-      email: data.user.email,
-      token: data.access_token,
-      img: data.img || "",
-    });
+    if (data.user) {
+      setUser({
+        email: data.user.email,
+        token: data.access_token,
+        img: data.img || "",
+      });
+      
+    }
   };
 
   useEffect(() => {
@@ -101,7 +96,12 @@ export default function Login() {
   }, [user]);
 
   return (
-    <main className="w-[30%] h-[40%] bg-[#EDEDED] rounded-lg shadow-2xl">
+    <motion.main
+      className="w-[35%] duration-200 bg-[#EDEDED] rounded-lg shadow-2xl"
+      style={{ overflow: "hidden" }}
+      animate={{ height: containerHeights[selectedTab] }} 
+      transition={{ duration: 0.3 }}
+    >
       <nav style={nav}>
         <LayoutGroup>
           <ul style={tabsContainer}>
@@ -142,6 +142,6 @@ export default function Login() {
           )}
         </motion.div>
       </AnimatePresence>
-    </main>
+    </motion.main>
   );
 }
