@@ -4,63 +4,65 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { contents, type Content as ContentType } from "@/src/util/content";
 import { ContentComponent } from "@/src/components/ContentComponent";
+import { useUser } from "@/src/contexts/UserContext";
+import { useRouter } from "next/navigation";
 
 export default function Conteudo() {
     const [sideOpen, setSideOpen] = useState(false);
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
-    const sectionRefs = useRef<(HTMLElement | null)[]>([])
+    const sectionRefs = useRef<(HTMLElement | null)[]>([]);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [sideContentOpen, setSideContentOpen] = useState(false);
-    const [logged, setLogged] = useState(false)
+    const { user } = useUser();
     const [screenSize, setScreenSize] = useState<number>(0);
+    const router = useRouter();
 
-    const getSidebarWidth = () => {
-        if (screenSize < 1024) {
-            return false
-        }
-        return true
-    };
+    const getSidebarWidth = () => screenSize >= 1024;
 
     const [content, setContent] = useState<ContentType>({
         thumb: "",
         title: {
-          text: "",
-          content: "",        
-          image: null,        
+            text: "",
+            content: "",
+            image: null,
         },
-        subtitles: [],
+        subtitles: [
+            {
+                text: "",
+                contentMd: "",
+                image: null,
+            }
+        ],
         exercises: [],
-      });
-      
-
-    const pointsCount = 1
-        + (content.subtitles?.length ?? 0)
-        + (content.exercises?.length ?? 0)
+    });
 
     const itemVariants = {
         hidden: { y: -10, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
-    }
+    };
 
     const toggleExpand = (index: number) => {
         setExpandedIndexes(prev =>
             prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
-        )
-    }
+        );
+    };
 
     const scrollToSection = (index: number) => {
-        sectionRefs.current[index]?.scrollIntoView({
-            behavior: "smooth",
-        });
-        setActiveIndex(index);
+        const el = sectionRefs.current[index - 1];
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+            setActiveIndex(index);
+        }
     };
 
     const changePageButton = (option: "next" | "back") => {
         const index = contents.findIndex(c => c.title.text === content.title.text);
         const newIndex = option === "next" ? index + 1 : index - 1;
-        setContent(contents[newIndex]);
-        setActiveIndex(null);
-    }
+        if (contents[newIndex]) {
+            setContent(contents[newIndex]);
+            setActiveIndex(null);
+        }
+    };
 
     useEffect(() => {
         const handleResize = () => setScreenSize(window.innerWidth);
@@ -70,11 +72,8 @@ export default function Conteudo() {
     }, []);
 
     useEffect(() => {
-        scrollToSection(-1);
-    }, [content]);
-
-    useEffect(() => {
-        document.body.getBoundingClientRect();
+        sectionRefs.current = [];
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }, [content]);
 
     useEffect(() => {
@@ -98,6 +97,12 @@ export default function Conteudo() {
         };
     }, [activeIndex]);
 
+    const sectionLabels = [
+        content.title.text,
+        ...content.subtitles.map(s => s.text),
+        ...content.exercises.map((e, i) => e.title ?? `Exercício ${i + 1}`),
+    ];
+
     return (
         <>
             <main className="h-full w-full relative flex overflow-hidden">
@@ -111,7 +116,7 @@ export default function Conteudo() {
                                 animate={{ height: sideContentOpen ? 80 : "auto", opacity: 1 }}
                                 exit={{ height: 80, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                className={`fixed right-8 top-1/5 flex flex-col items-center z-10 bg-gray-200 text-black shadow-lg rounded-lg px-4 w-40 overflow-hidden ${logged ? "" : "blur-md"}`}
+                                className={`fixed right-8 top-1/5 flex flex-col items-center z-10 bg-gray-200 text-black shadow-lg rounded-lg px-4 w-40 overflow-hidden ${user ? "" : "blur-md"}`}
                             >
                                 <motion.div
                                     initial={{ height: '80%' }}
@@ -131,27 +136,21 @@ export default function Conteudo() {
                                     exit="hidden"
                                     className={`flex flex-col gap-5 h-full w-full pt-2 pointer-events-auto z-10 ${sideContentOpen ? 'overflow-hidden' : ''}`}
                                 >
-                                    {Array.from({ length: pointsCount }).map((_, i) => {
+                                    {sectionLabels.map((label, i) => {
                                         const isActive = i === activeIndex
                                         return (
-                                            <motion.div
-                                                key={i}
-                                                variants={{
-                                                    hidden: { opacity: 0, x: -10 },
-                                                    show: { opacity: 1, x: 0 }
-                                                }}
-                                                className="flex justify-between gap-5"
-                                            >
+                                            <motion.div key={i} className="flex justify-between gap-5">
                                                 <motion.label
                                                     className={`cursor-pointer ${isActive ? 'text-blue-500' : ''}`}
                                                     htmlFor={`dot-${i}`}
                                                 >
-                                                    {sectionRefs.current[i]?.textContent?.split(' ')[0]}
+                                                    {label}
                                                 </motion.label>
                                                 <motion.button
                                                     id={`dot-${i}`}
                                                     onClick={() => scrollToSection(i)}
-                                                    className={`w-4 h-4 rounded-full border-2 mb-4 cursor-pointer ${isActive ? 'bg-blue-500 border-blue-700' : 'bg-white border-gray-400'}`}
+                                                    className={`w-4 h-4 rounded-full border-2 mb-4 cursor-pointer ${isActive ? 'bg-blue-500 border-blue-700' : 'bg-white border-gray-400'
+                                                        }`}
                                                     initial={false}
                                                     animate={{ scale: isActive ? 1.4 : 1, opacity: isActive ? 1 : 0.5 }}
                                                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -159,6 +158,7 @@ export default function Conteudo() {
                                             </motion.div>
                                         )
                                     })}
+
                                 </motion.div>
 
                                 <motion.div
@@ -290,15 +290,15 @@ export default function Conteudo() {
                 {content.title.text ? (
                     <>
                         {
-                            !logged && (
-                                <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-                                    <span onClick={() => { setLogged(true) }} className="bg-white p-7 text-3xl z-20 rounded-2xl shadow-2xl text-black">Faça login para acessar o conteúdo</span>
+                            !user && (
+                                <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer">
+                                    <span onClick={() => { router.push("/login?tab=Login") }} className="bg-white p-7 text-3xl z-20 rounded-2xl shadow-2xl text-black">Faça login para acessar o conteúdo</span>
                                 </div>
                             )
                         }
                         <div
                             key={content.title.text}
-                            className={`w-full overflow-y-auto h-full flex flex-col items-center ${logged ? "" : "blur-md"}`}>
+                            className={`w-full overflow-y-auto h-full flex flex-col items-center ${user ? "" : "blur-md"}`}>
 
                             <ContentComponent sectionRefs={sectionRefs} content={content} />
                             <div className="w-full h-12 py-3 pb-12">
