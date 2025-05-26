@@ -1,3 +1,6 @@
+'use client'
+
+
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useUser } from '@/src/contexts/UserContext';

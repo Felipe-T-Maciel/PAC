@@ -4,7 +4,6 @@ import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import LoginSquare from "@/src/components/LoginComponent/LoginSquare";
 import RegisterSquare from "@/src/components/LoginComponent/RegisterSquare";
-import { useUser } from '@/src/contexts/UserContext';
 import { useSearchParams } from 'next/navigation';
 import { useButtonContext } from "@/src/contexts/ThemeContext";
 

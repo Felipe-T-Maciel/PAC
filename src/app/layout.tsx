@@ -1,4 +1,5 @@
 'use client'
+
 import "@/src/style/global.css";
 import { UserProvider } from "@/src/contexts/UserContext";
 import { ButtonProvider } from "@/src/contexts/ThemeContext";
