@@ -39,7 +39,7 @@ export const HeaderComponent = () => {
         <>
             <div className="fixed z-50 flex items-center w-full h-16 justify-between mont-montserrat bg-[#003550]">
                 <div onClick={() => router.push("/")} className="w-[5%] px-4 cursor-pointer">
-                    <Image src={"/catolica.png"} width={40} height={40} alt="logo catolica"></Image>
+                    {/* <Image src={"/catolica.png"} width={40} height={40} alt="logo catolica"></Image> */}
                 </div>
                 <div className='flex w-full gap-5 text-white'>
                     <div className='cursor-pointer' onClick={() => router.push("/")}>
