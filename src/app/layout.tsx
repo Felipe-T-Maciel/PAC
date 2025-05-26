@@ -11,11 +11,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   const router = useRouter();
 
-  useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) return;
-    router.push("/");
-  })
+  // useEffect(() => {
+  //   const token = localStorage.getItem('access_token');
+  //   if (token) return;
+  //   router.push("/");
+  // })
 
   return (
     <html lang="pt-br" suppressHydrationWarning>
