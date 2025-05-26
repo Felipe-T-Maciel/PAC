@@ -23,7 +23,6 @@ interface ContentComponentProps {
     sectionRefs: React.MutableRefObject<Array<HTMLElement | null>>;
 }
 
-
 interface ModalInfo {
     id: number;
     correct: boolean;
@@ -39,7 +38,6 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
         hidden: { y: 10, opacity: 0 },
         show: { y: 0, opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
     }
-
 
     const validateAnswer = (answerD?: string | null) => {
         let correctAnswer = content.exercises.find((exercise) => exercise.answer === answerD);
@@ -66,7 +64,6 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
         }
         return () => clearTimeout(timeout);
     }, [showModal]);
-
 
     return (
         <>
@@ -116,9 +113,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                         </div>
                     )}
                 </div>
-
                 {content.subtitles.map((sub, idx) => (
-
                     <section className="w-full "
                         ref={el => { if (el) sectionRefs.current[idx + 1] = el }}
                         key={idx} >
@@ -218,8 +213,6 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                                 Ver resposta
                                             </motion.div>
                                         ) : null}
-
-
                                     </div>
                                 )}
                             </div>

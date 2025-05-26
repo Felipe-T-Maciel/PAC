@@ -48,7 +48,7 @@ export default function Conteudo() {
     };
 
     const scrollToSection = (index: number) => {
-        const el = sectionRefs.current[index];
+        const el = sectionRefs.current[index - 1];
         if (el) {
             el.scrollIntoView({ behavior: "smooth" });
             setActiveIndex(index);
