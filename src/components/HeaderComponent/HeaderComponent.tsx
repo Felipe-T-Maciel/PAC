@@ -5,19 +5,25 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useUser } from '@/src/contexts/UserContext';
+import { useButtonContext } from '@/src/contexts/ThemeContext';
 
 export const HeaderComponent = () => {
     const router = useRouter();
     const [theme, setTheme] = useState<string>('light');
     const { user, setUser } = useUser();
-
+    const { setButtonState } = useButtonContext();
+    
     useEffect(() => {
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.classList.add('dark');
             setTheme('dark');
+            setButtonState("dark");
+
         } else {
             document.documentElement.classList.remove('dark');
             setTheme('light');
+            setButtonState("light");
+
         }
     }, []);
 
@@ -27,10 +33,12 @@ export const HeaderComponent = () => {
         if (htmlElement.classList.contains('dark')) {
             htmlElement.classList.remove('dark');
             setTheme('light');
+            setButtonState("light");
             localStorage.setItem('theme', 'light');
         } else {
             htmlElement.classList.add('dark');
             setTheme('dark');
+            setButtonState("dark");
             localStorage.setItem('theme', 'dark');
         }
     };

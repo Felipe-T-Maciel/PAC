@@ -6,13 +6,16 @@ import LoginSquare from "@/src/components/LoginComponent/LoginSquare";
 import RegisterSquare from "@/src/components/LoginComponent/RegisterSquare";
 import { useUser } from '@/src/contexts/UserContext';
 import { useSearchParams } from 'next/navigation';
+import { useButtonContext } from "@/src/contexts/ThemeContext";
 
 export default function Login() {
   const tabs = ["Login", "Register"];
 
   const searchParams = useSearchParams();
+  const { buttonState } = useButtonContext();
   const initialTab = searchParams.get('tab') === 'Register' ? 'Register' : 'Login';
   const [selectedTab, setSelectedTab] = useState<"Login" | "Register">(initialTab);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const underline: React.CSSProperties = {
     position: "absolute",
@@ -65,13 +68,16 @@ export default function Login() {
     setSelectedTab(tab === 'Register' ? 'Register' : 'Login');
   }, [searchParams]);
 
+  useEffect(() => {
+    setTheme(buttonState === "dark" ? "dark" : "light");
+  }, [buttonState])
 
   return (
     <>
       <img src="/back1.svg" alt="" className="absolute top-0 right-0 -z-10" />
       <img src="/back2.svg" alt="" className="absolute top-0 left-0 -z-10" />
       <motion.main
-        className="w-[95%] md:w-[70%] lg:w-[55%] xl:w-[35%] 2xl:w-[20%] duration-200 rounded-lg relative shadow-2xl bg-[#EDEDED]"
+        className={`w-[95%] md:w-[70%] lg:w-[55%] xl:w-[35%] 2xl:w-[20%] ${theme == "light" ? "bg-[#EDEDED] shadow-gray-500" : "bg-[#2B2B2B] shadow-gray-700"} duration-200 rounded-lg relative shadow-2xl `}
         style={{ overflow: "hidden" }}
         animate={{ height: containerHeights[selectedTab] }}
         transition={{ duration: 0.3 }}
