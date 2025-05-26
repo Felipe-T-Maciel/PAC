@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from '@/src/contexts/UserContext';
 import { useRouter } from "next/navigation";
+import { useButtonContext } from "@/src/contexts/ThemeContext";
 
 
 export default function LoginSquare() {
@@ -12,6 +13,12 @@ export default function LoginSquare() {
   });
   const [error, setError] = useState(false);
   const router = useRouter()
+  const [theme, setTheme] = useState<string>('light');
+  const { buttonState } = useButtonContext();
+
+  useEffect(() => {
+    setTheme(buttonState === "light" ? "light" : "dark");
+  });
 
   const handleRegister = async () => {
     setError(false);
@@ -44,11 +51,11 @@ export default function LoginSquare() {
   return (
     <div className="h-fit">
       <div className="flex justify-center pt-4 mb-[6%]">
-        <p className="font-semibold pt-2 text-2xl text-[#003550]">Acesse sua conta</p>
+        <p className={`font-semibold pt-2 text-2xl ${theme == "light" ? "text-[#003550]" : "text-[#6EB8DE]"}`}>Acesse sua conta</p>
       </div>
       <div className="w-full h-full flex items-center flex-col gap-4">
         <div
-          className={`w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md ${error ? "border-2 border-red-500" : ""
+          className={`w-fit h-[3rem] ${theme == "light" ? "bg-white" : "shadow-gray-600"} flex items-center p-2 rounded-md shadow-md ${error ? "border-2 border-red-500" : ""
             }`}
         >
           <input
@@ -58,14 +65,15 @@ export default function LoginSquare() {
                 email: event.target.value
               });
             }}
-            className="min-w-[17rem] outline-0 py-2 text-gray-700"
-            type="text"
+            className={`min-w-[17rem] outline-0 py-2 text-gray-400 `}
+            type="email"
             placeholder="E-mail"
           />
-          <i className="pi pi-user text-[#003550]"></i>
+          <i className={`pi pi-user ${theme == "light" ? "text-[#003550]" : "text-[#6EB8DE]"}`}></i>
+
         </div>
         <div
-          className={`w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md ${error ? "border-2 border-red-500" : ""
+          className={`w-fit ${theme == "light" ? "bg-white" : "shadow-gray-600"} h-[3rem] flex items-center p-2 rounded-md shadow-md ${error ? "border-2 border-red-500" : ""
             }`}
         >
           <input
@@ -75,24 +83,23 @@ export default function LoginSquare() {
                 password: event.target.value
               });
             }}
-            className="min-w-[17rem] outline-0 py-2 text-gray-700"
+            className={`min-w-[17rem] outline-0 py-2 text-gray-400 `}
             type="password"
             placeholder="Senha"
           />
-          <i className="pi pi-lock text-[#003550]"></i>
+          <i className={`pi pi-lock ${theme == "light" ? "text-[#003550]" : "text-[#6EB8DE]"}`}></i>
         </div>
-        {error && (
-          <p className="text-red-500 absolute bottom-[23%] text-sm">E-mail ou senha incorretos</p>
-        )}
+        <p className={`text-red-500 ${error ? 'visible':'invisible'} text-sm`}>E-mail ou senha incorretos</p>
+
         <motion.div
           onClick={handleRegister}
           whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
           whileTap={{ scale: 0.95 }}
-          className="
+          className={`
                 cursor-pointer px-8 py-2 rounded-md
                 bg-gradient-to-br from-[#3E7B9A] via-[#003550] to-[#003550]
-                bg-[length:200%_100%] text-white mt-[5%]
-              "
+                bg-[length:200%_100%] text-white
+              `}
         >
           Entrar
         </motion.div>
