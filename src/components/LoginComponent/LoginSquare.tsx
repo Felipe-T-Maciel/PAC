@@ -16,7 +16,7 @@ export default function LoginSquare() {
   const handleRegister = async () => {
     setError(false);
     try {
-      const response = await fetch("http://127.0.0.1:8092/login", {
+      const response = await fetch("http://10.1.11.107:8092/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export default function LoginSquare() {
                 email: event.target.value
               });
             }}
-            className="min-w-[17rem] outline-0 py-2"
+            className="min-w-[17rem] outline-0 py-2 text-gray-700"
             type="text"
             placeholder="E-mail"
           />
@@ -75,14 +75,14 @@ export default function LoginSquare() {
                 password: event.target.value
               });
             }}
-            className="min-w-[17rem] outline-0 py-2 "
+            className="min-w-[17rem] outline-0 py-2 text-gray-700"
             type="password"
             placeholder="Senha"
           />
           <i className="pi pi-lock text-[#003550]"></i>
         </div>
         {error && (
-          <p className="text-red-500 absolute bottom-[20%] text-sm">E-mail ou senha incorretos</p>
+          <p className="text-red-500 absolute bottom-[23%] text-sm">E-mail ou senha incorretos</p>
         )}
         <motion.div
           onClick={handleRegister}

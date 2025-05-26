@@ -22,7 +22,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const token = localStorage.getItem('access_token');
     if (!token) return;
 
-    fetch('http://127.0.0.1:8092/token', {
+    fetch('http://10.1.11.107:8092/token', {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${token}` },
     })
@@ -42,19 +42,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem('access_token');
       });
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('access_token', user.token);
-      localStorage.setItem(
-        'user_data',
-        JSON.stringify({ email: user.email, img: user.img })
-      );
-    } else {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('user_data');
-    }
-  }, [user]);
 
   const setUser = (u: User | null) => setUserState(u);
 

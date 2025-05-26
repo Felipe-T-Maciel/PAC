@@ -19,7 +19,7 @@ export default function RegisterSquare() {
   }, [user]);
 
   const handleRegister = async () => {
-    const response = await fetch("http://127.0.0.1:8092/register", {
+    const response = await fetch("http://10.1.11.107:8092/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export default function RegisterSquare() {
               ...user,
               email: event.target.value
             })
-          }} className="min-w-[17rem] outline-0 py-2" type="text" placeholder="E-mail" />
+          }} className="min-w-[17rem] outline-0 py-2 text-gray-700" type="text" placeholder="E-mail" />
           <i className="pi pi-user text-[#003550]"></i>
         </div>
         <div className="w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md">
@@ -58,7 +58,7 @@ export default function RegisterSquare() {
               password: event.target.value
             })
           }}
-            className="min-w-[17rem] outline-0 py-2" type="password" placeholder="Senha" />
+            className="min-w-[17rem] outline-0 py-2 text-gray-700" type="password" placeholder="Senha" />
           <i className="pi pi-lock text-[#003550]"></i>
         </div>
         <div className="w-fit h-[3rem] bg-white flex items-center p-2 rounded-md shadow-md">
@@ -69,7 +69,7 @@ export default function RegisterSquare() {
             //     ConfirmPassword: event.target.value
             //   })
             // }}
-            className="min-w-[17rem] outline-0 py-2" type="password" placeholder="Confirmar Senha" />
+            className="min-w-[17rem] outline-0 py-2 text-gray-700" type="password" placeholder="Confirmar Senha" />
           <i className="pi pi-lock text-[#003550]"></i>
         </div>
 
