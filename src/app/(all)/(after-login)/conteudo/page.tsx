@@ -2,15 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { contents } from "@/src/util/content";
+import { contents, type Content as ContentType } from "@/src/util/content";
 import { ContentComponent } from "@/src/components/ContentComponent";
-
-interface Content {
-    thumb: string
-    title: { text: string; content: string[]; image: string }
-    subtitles: Array<{ text: string; content: string; image: string }>
-    exercises: Array<{ title: string; content: string; image: string; options: Array<{ text: string }> }>
-}
 
 export default function Conteudo() {
     const [sideOpen, setSideOpen] = useState(false);
@@ -28,20 +21,17 @@ export default function Conteudo() {
         return true
     };
 
-    const [content, setContent] = useState<Content>({
+    const [content, setContent] = useState<ContentType>({
         thumb: "",
         title: {
-            text: "",
-            image: "",
-            content: [],
+          text: "",
+          content: "",        
+          image: null,        
         },
-        subtitles: [{
-            text: "",
-            image: "",
-            content: "",
-        }],
+        subtitles: [],
         exercises: [],
-    });
+      });
+      
 
     const pointsCount = 1
         + (content.subtitles?.length ?? 0)
@@ -190,7 +180,7 @@ export default function Conteudo() {
 
                 <motion.div
                     initial={{ width: "2rem" }}
-                    animate={{ width: sideOpen ? "16rem" : "0rem" }}
+                    animate={{ width: sideOpen ? "25rem" : "0rem" }}
                     className={`flex items-center absolute left-0 lg:relative z-20 h-full`}>
                     <motion.div
                         initial={{ width: 0 }}
@@ -272,7 +262,7 @@ export default function Conteudo() {
                                                                     }}
                                                                     className="cursor-pointer p-1 text-sm"
                                                                 >
-                                                                    {subtitle.text[subIndex]}
+                                                                    {subtitle.text}
                                                                 </motion.div>
                                                             ))}
                                                         </motion.div>

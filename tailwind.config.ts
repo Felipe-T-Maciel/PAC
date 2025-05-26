@@ -11,6 +11,9 @@ module.exports = {
         'white': '#FCFCFC',
         'black': '#0F0F0F'
       },
+      fontFamily: {
+        alata: ['Alata', 'sans-serif'],
+      },
     },
   },
   darkMode: "class"

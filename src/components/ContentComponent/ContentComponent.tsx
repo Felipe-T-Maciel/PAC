@@ -4,16 +4,24 @@ import Image from "next/image"
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import { AnswerModalComponent } from "@/src/components/ContentComponent/components/AnswerModal"
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface ContentComponentProps {
     content: {
-        thumb: string
-        title: { text: string; content: string[]; image: string }
-        subtitles: Array<{ text: string; content: string; image: string }>
-        exercises: Array<{ title: string; content: string; image: string; options: Array<{ text: string }> }>
-    }
-    sectionRefs: React.MutableRefObject<Array<HTMLElement | null>>
+        thumb: string;
+        title: { text: string; content: string; image?: string | null };
+        subtitles: Array<{ text: string; contentMd: string; image?: string | null }>;
+        exercises: Array<{
+            title?: string;
+            content: string;
+            image?: string | null;
+            options: Array<{ text: string; correct: boolean }>;
+        }>;
+    };
+    sectionRefs: React.MutableRefObject<Array<HTMLElement | null>>;
 }
+
 
 interface ModalInfo {
     id: number;
@@ -79,8 +87,8 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                     ))}
                 </AnimatePresence>
             </motion.div>
-            <div className={`relative flex flex-col justify-center items-start w-full  max-w-[75vw] `}>
-                <div className="py-16">
+            <div className={` relative flex flex-col justify-center items-start w-full  max-w-[75vw]`}>
+                <div className="py-4">
                     <motion.div
                         ref={el => { if (el) sectionRefs.current[0] = el }}
                         variants={itemVariants}
@@ -88,12 +96,12 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                         animate="show"
                         className="flex flex-col "
                         data-scroll-id="title">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col pt-4">
                             <span className="text-6xl mb-7">{content.title.text}</span>
-                            <span className="text-2xl mb-10 text-justify">{content.title.content[0]}</span>
+                            <p className="text-xl  text-justify font-normal">{content.title.content}</p>
                         </div>
                     </motion.div>
-                    {content.title.image != null && (
+                    {content.title.image && (
                         <div className="flex justify-center w-full">
                             <motion.div
                                 variants={itemVariants}
@@ -105,28 +113,52 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                         </div>
                     )}
                 </div>
-                <div className="w-full bg-gray-300 h-0.5 my-2 shadow-2xl rounded-lg"></div>
 
-                {content.subtitles.map((sub, index) => (
-                    <div key={index}>
-                        <motion.section
+                {content.subtitles.map((sub, idx) => (
 
-                            ref={el => { if (el) sectionRefs.current[index + 1] = el }}
-                            variants={itemVariants}
-                            initial="hidden"
-                            animate="show"
-                            className="py-16 w-full"
-                        >
-                            <h2 className="text-5xl mb-7">{sub.text}</h2>
-                            <p className="text-2xl mb-10 text-justify">{sub.content}</p>
-                            {sub.image[0] && (
-                                <div className="flex justify-center w-full h-60 relative">
-                                    <Image src={sub.image} fill alt="" className="object-cover rounded-xl shadow-lg" />
-                                </div>
-                            )}
-                        </motion.section>
-                        <div className="w-full bg-gray-300 h-0.5 my-2 shadow-2xl rounded-lg"></div>
-                    </div>
+                    <section className="w-full " key={idx} >
+                        <div className="w-full bg-gray-300 h-0.5 my-2 shadow-2xl rounded-lg mb-5"></div>
+
+                        <h2 className="text-3xl font-bold mb-4">{sub.text}</h2>
+                        <div className="text-2xl font-alata text-justify mb-8 max-w-full ">
+                            <ReactMarkdown
+                                remarkPlugins={[remarkGfm]}
+                                components={{
+                                    pre: ({ node, ...props }) => (
+                                        <pre className="w-full max-w-full overflow-x-auto p-4 rounded-md mb-4 font-sans " {...props} />
+                                    ),
+                                    p: ({ node, ...props }) => (
+                                        <p className="break-words whitespace-pre-wrap font-sans text-xl" {...props} />
+                                    ),
+                                    code: ({ node, ...props }) => (
+                                        <code className="break-words whitespace-pre-wrap font-sans text-xl" {...props} />
+                                    ),
+                                    ul: ({ node, ...props }) => (
+                                        <ul className="list-disc list-inside pl-5 mb-4 text-xl font-sans text-justify" {...props} />
+                                    ),
+                                    li: ({ node, ...props }) => (
+                                        <li className="mb-2 text-xl font-sans text-justify" {...props} />
+                                    ),
+                                    strong: ({ node, ...props }) => (
+                                        <strong className="font-bold">{props.children}</strong>
+                                    ),
+                                }}
+                            >
+                                {sub.contentMd}
+                            </ReactMarkdown>
+                        </div>
+                        {sub.image && (
+                            <div className="flex justify-center w-full">
+                                <motion.div
+                                    variants={itemVariants}
+                                    initial="hidden"
+                                    animate="show"
+                                    className="flex flex-col rounded-xl shadow-2xl">
+                                    <Image src={sub.image} width={400} height={10} alt="" className="rounded-xl" />
+                                </motion.div>
+                            </div>
+                        )}
+                    </section>
                 ))}
                 {
                     content.exercises != null && content.exercises.length > 0 && (

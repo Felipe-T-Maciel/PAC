@@ -1,13 +1,12 @@
 "use client"
 
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { LampIcon, CheckIcon, HelpIcon } from "@/src/components/Icons";
 import { useRouter } from "next/navigation";
 
 export default function HomePage() {
     const router = useRouter();
-
     const containerVariants = {
         hidden: {},
         show: { transition: { staggerChildren: 0.2 } },

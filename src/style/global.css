@@ -49,3 +49,15 @@ html {
   --tw-gradient-via: #4295be;
   --tw-gradient-to: #f0f0f0;
 }
+
+.backgroud_login{
+  background-color: blue;
+  background-size: cover;
+  background-position: center;
+}
+
+.alata-regular {
+  font-family: "Alata", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
