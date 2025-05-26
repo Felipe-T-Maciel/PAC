@@ -30,7 +30,7 @@ export default function RegisterSquare() {
     }
     setError(false);
 
-    const response = await fetch("http://10.1.11.107:8092/register", {
+    const response = await fetch("http://10.197.9.173:8092/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

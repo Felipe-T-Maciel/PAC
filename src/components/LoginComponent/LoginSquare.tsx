@@ -25,7 +25,7 @@ export default function LoginSquare() {
   const handleRegister = async () => {
     setError(false);
     try {
-      const response = await fetch("http://10.1.11.107:8092/login", {
+      const response = await fetch("http://10.197.9.173:8092/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -22,7 +22,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const token = localStorage.getItem('access_token');
     if (!token) return;
 
-    fetch('http://10.1.11.107:8092/token', {
+    fetch('http://10.197.9.173:8092/token', {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${token}` },
     })

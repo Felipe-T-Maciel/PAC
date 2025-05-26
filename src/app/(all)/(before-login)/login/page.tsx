@@ -75,6 +75,7 @@ export default function Login() {
     <>
       <img src="/back1.svg" alt="" className="absolute top-0 right-0 -z-10" />
       <img src="/back2.svg" alt="" className="absolute top-0 left-0 -z-10" />
+      <img src="/Group 16 (2).svg" alt="" className="absolute top-20 left-10 -z-10" />
       <motion.main
         className={`w-[95%] md:w-[70%] lg:w-[55%] xl:w-[35%] 2xl:w-[20%] ${theme == "light" ? "bg-[#EDEDED] shadow-gray-500" : "bg-[#2B2B2B] shadow-gray-700"} duration-200 rounded-lg relative shadow-2xl `}
         style={{ overflow: "hidden" }}
