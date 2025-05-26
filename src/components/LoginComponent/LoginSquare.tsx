@@ -44,7 +44,7 @@ export default function LoginSquare() {
   return (
     <div className="h-fit">
       <div className="flex justify-center pt-4 mb-[6%]">
-        <p className="font-semibold pt-2 text-2xl text-[#003550]">Acesse sua conta</p>
+        <p className="font-semibold pt-2 text-2xl  text-[#003550]">Acesse sua conta</p>
       </div>
       <div className="w-full h-full flex items-center flex-col gap-4">
         <div
