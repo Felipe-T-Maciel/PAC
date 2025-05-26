@@ -672,5 +672,5 @@ Dominar a entrada e saída de dados é essencial para qualquer programador C. Co
                 answer: "%f"
             }
         ],
-    },
+    }
 ];
