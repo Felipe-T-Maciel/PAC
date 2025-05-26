@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #f0f0f0;
+  --foreground: #171717;
+}
+
+.dark {
+  --background: #171717;
+  --foreground: #f5f5f5;
+}
+
+.shadow-custom {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Alata", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dark .texto-clip {
+  --tw-gradient-from: #65a5c5;
+  --tw-gradient-via: #4295be;
+  --tw-gradient-to: #f0f0f0;
+}
+
+.backgroud_login{
+  background-color: blue;
+  background-size: cover;
+  background-position: center;
+}
+
+.alata-regular {
+  font-family: "Alata", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
