@@ -172,9 +172,9 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                             animate="show"
                             className="flex flex-col "
                         >
-                            <div className="flex flex-col">
-                                <span className="text-4xl mb-7">{exercise.title}</span>
-                                <span className="text-xl mb-10 text-justify">{exercise.content}</span>
+                            <div className="flex flex-col my-10">
+                                <span className="text-4xl mb-3">{exercise.title}</span>
+                                <span className="text-xl  text-justify">{exercise.content}</span>
                                 {exercise?.options && (
                                     <div className="flex flex-row lg:flex-col justify-between lg:justify-normal items-end lg:items-start gap-10 relative">
                                         <div className="flex flex-col gap-1">
@@ -206,7 +206,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                                 onClick={() => validateAnswer(exercise.answer)}
                                                 whileHover={{ scale: 1.05, transition: { duration: 0.4, ease: "easeOut" } }}
                                                 whileTap={{ scale: 0.95 }}
-                                                className="shadow-custom cursor-pointer px-6 py-2 rounded-md font-medium
+                                                className="my-4 shadow-custom cursor-pointer px-6 py-2 rounded-md font-medium
                bg-gradient-to-br from-[#3E7B9A] via-[#003550] to-[#003550]
                bg-[length:200%_100%] text-white w-38 text-center h-10"
                                             >

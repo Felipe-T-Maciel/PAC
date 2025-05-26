@@ -180,7 +180,7 @@ export default function Conteudo() {
 
                 <motion.div
                     initial={{ width: "2rem" }}
-                    animate={{ width: sideOpen ? "25rem" : "0rem" }}
+                    animate={{ width: sideOpen ? "27rem" : "0rem" }}
                     className={`flex items-center absolute left-0 lg:relative z-20 h-full`}>
                     <motion.div
                         initial={{ width: 0 }}

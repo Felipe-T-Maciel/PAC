@@ -5,11 +5,12 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useUser } from '@/src/contexts/UserContext';
 import { useButtonContext } from "@/src/contexts/ThemeContext";
+import { useRouter }  from "next/navigation";
 
 export default function RegisterSquare() {
   const [theme, setTheme] = useState<string>('light');
   const { buttonState } = useButtonContext();
-
+  const router = useRouter()
   useEffect(() => {
     setTheme(buttonState === "light" ? "light" : "dark");
   });
@@ -40,7 +41,7 @@ export default function RegisterSquare() {
     const data = await response.json();
     localStorage.setItem("access_token", data.access_token);
     setUser({
-      email: "",
+      email: data.user.email,
       token: data.access_token,
       img: data.img || "",
     });
@@ -109,6 +110,7 @@ export default function RegisterSquare() {
             }
             setError(false);
             handleRegister();
+            router.push("/")
           }}
           whileHover={{ scale: 1.05, backgroundPosition: "100% 0%", transition: { duration: 0.4, ease: "easeOut" } }}
           whileTap={{ scale: 0.95 }}
