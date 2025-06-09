@@ -4,13 +4,11 @@ import 'primeicons/primeicons.css';
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useUser } from '@/src/contexts/UserContext';
 import { useButtonContext } from '@/src/contexts/ThemeContext';
 
 export const HeaderComponent = () => {
     const router = useRouter();
     const [theme, setTheme] = useState<string>('light');
-    const { user, setUser } = useUser();
     const { setButtonState } = useButtonContext();
     
     useEffect(() => {
@@ -58,18 +56,6 @@ export const HeaderComponent = () => {
                     </div>
                 </div>
                 <div className="gap-3 flex items-center w-[60%] justify-end px-4 h-8  text-white ">
-                    {user?.email != null ? (
-                        <div>Bem vindo(a), {user?.email}</div>
-                    ) : (
-                        <div className="flex gap-3">
-                            <div onClick={() => router.push("/login?tab=Login")} className="flex items-center justify-center w-[5rem] h-full cursor-pointer border-1 border-solid rounded-md p-1 border-gray-500">
-                                <span>Entrar</span>
-                            </div>
-                            <div onClick={() => router.push("/login?tab=Register")} className="flex items-center justify-center h-full cursor-pointer  border-1 border-solid rounded-md p-1 px-3 bg-white text-black">
-                                <span>Registrar-se</span>
-                            </div>
-                        </div>
-                    )}
                     <div className="flex items-center justify-center text-center w-fit pt-0.5">
                         <span style={{ fontSize: "1rem" }} onClick={() => handleTheme()} className={`cursor-pointer   ${theme == 'dark' ? "pi pi-moon" : "pi pi-sun"}`}></span>
                     </div>
