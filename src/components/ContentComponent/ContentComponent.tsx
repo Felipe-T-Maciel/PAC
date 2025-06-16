@@ -116,7 +116,7 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                     ))}
                 </AnimatePresence>
             </motion.div>
-            
+
             <div className={` relative flex flex-col justify-center items-start w-full  max-w-[75vw]`}>
                 <div className="py-4">
                 </div>
@@ -232,7 +232,6 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                             className="flex flex-col w-full"
                         >
                             <div className="flex flex-col mb-7">
-                                <span className="text-4xl mb-3">{exercise.title}</span>
                                 <ReactMarkdown
                                     remarkPlugins={[remarkGfm]}
                                     components={{
@@ -250,6 +249,52 @@ export const ContentComponent = ({ content, sectionRefs }: ContentComponentProps
                                                 className="text-blue-500 underline"
                                                 {...props}
                                             />
+                                        ),
+                                        pre: ({ node, ...props }) => (
+                                            <pre className="p-4 rounded-md mb-4 font-alata w-full flex justify-center" {...props} />
+                                        ),
+                                        h1: ({ node, ...props }) => (
+                                            <h1 className="text-3xl" {...props} />
+                                        ),
+                                        code: ({ node, ...props }) => (
+                                            <code className="py-3 px-4 block font-alata text-xl bg-gray-600 text-white w-fit min-w-[40%] rounded-xl" {...props} />
+                                        ),
+                                        ul: ({ node, ...props }) => (
+                                            <ul className="list-disc list-inside pl-5 mb-4 text-xl font-alata text-justify" {...props} />
+                                        ),
+                                        li: ({ node, ...props }) => (
+                                            <li className="mb-2 text-xl font-alata text-justify" {...props} />
+                                        ),
+                                    }}
+                                >
+                                    {exercise.title}
+                                </ReactMarkdown>
+                                <ReactMarkdown
+                                    remarkPlugins={[remarkGfm]}
+                                    components={{
+                                        p: ({ node, children, ...props }) => (
+                                            <p
+                                                className="break-words whitespace-pre-wrap font-alata mb-4 text-xl  text-justify"
+                                                {...props}
+                                            >
+                                                {children}
+                                            </p>
+                                        ),
+                                        a: ({ node, ...props }) => (
+                                            <a
+                                                target="_blank"
+                                                className="text-blue-500 underline"
+                                                {...props}
+                                            />
+                                        ),
+                                        pre: ({ node, ...props }) => (
+                                            <pre className="p-4 rounded-md mb-4 font-alata w-full flex justify-center" {...props} />
+                                        ),
+                                        h1: ({ node, ...props }) => (
+                                            <h1 className="text-3xl" {...props} />
+                                        ),
+                                        code: ({ node, ...props }) => (
+                                            <code className="py-3 px-4 block font-alata text-xl bg-gray-600 text-white w-fit min-w-[40%] rounded-xl" {...props} />
                                         ),
                                     }}
                                 >

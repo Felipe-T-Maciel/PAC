@@ -68,8 +68,7 @@ export default function Conteudo() {
     }, []);
 
     const sectionLabels = [
-        ...content.subtitles.map(s => s.text),
-        ...content.exercises.map((e, i) => e.title ?? `Exercício ${i + 1}`),
+        ...content.subtitles.map(s => s.text)
     ];
 
     return (

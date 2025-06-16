@@ -76,7 +76,8 @@ Outra forma de fazer um fluxograma é utilizando o símbolo **[]** do teclado. U
         exercises: [
             {
                 id: "1",
-                title: "Exercício 1",
+                title: `
+# **Exercício 1**`,
                 content: `
 Analise a sequência: 1, 3, 6, 10, 15, 21, ... Qual o próximo número?`,
                 image: null,
@@ -90,7 +91,8 @@ Analise a sequência: 1, 3, 6, 10, 15, 21, ... Qual o próximo número?`,
             },
             {
                 id: "2",
-                title: "Exercício 2",
+                title: `
+# **Exercício 2**`,
                 content: `
 Faça um fluxograma que leia um número digitado pelo usuário e mostre esse número na tela  `,
                 image: null,
@@ -108,7 +110,8 @@ Faça um fluxograma que leia um número digitado pelo usuário e mostre esse nú
             },
             {
                 id: "3",
-                title: "Exercício 3",
+                title: `
+# **Exercício 3**`,
                 content: `
 Resolva o exercício disponibilizado no site: https://rachacuca.com.br/logica/problemas/amigas-na-escola/`,
                 image: null,
@@ -237,7 +240,8 @@ Para compilar e executar os códigos vamos usar um compilador online.
         exercises: [
             {
                 id: "4",
-                title: "Exercício 1",
+                title: `
+# **Exercício 1**`,
                 content: `
 Construa um programa que mostre seu nome e idade na tela.`,
                 image: null,
@@ -247,7 +251,8 @@ Construa um programa que mostre seu nome e idade na tela.`,
             },
             {
                 id: "5",
-                title: "Exercício 2",
+                title: `
+# **Exercício 2**`,
                 content: `
 Construa um programa que mostre em tela um cartão de visitas, use | e – para fazer o cartão. (use “\\n” dentro das aspas do printf no final do conteúdo para pular uma linha ex. printf(“Olá! \\n”); )`,
                 image: null,
@@ -257,7 +262,8 @@ Construa um programa que mostre em tela um cartão de visitas, use | e – para 
             },
             {
                 id: "6",
-                title: "Exercício 3",
+                title: `
+# **Exercício 3**`,
                 content: `
 Use comentários no código anterior para explicar a função de cada bloco de código.`,
                 image: null,
@@ -358,7 +364,8 @@ Aqui tem uma tabela para memorizar.
         exercises: [
             {
                 id: "7",
-                title: "Exercício 1",
+                title: `
+# **Exercício 1**`,
                 content: `
 Faça um programa que imprima a frase “Olá mundo”. `,
                 image: null,
@@ -368,7 +375,8 @@ Faça um programa que imprima a frase “Olá mundo”. `,
             },
             {
                 id: "8",
-                title: "Exercício 2",
+                title: `
+# **Exercício 2**`,
                 content: `
 Faça um programa que peça a idade da pessoa e o nome dela e imprima na mesma linha as respostas.  `,
                 image: null,
@@ -601,7 +609,8 @@ Se fosse no comando **“while”** ele não iria nem imprimir na tela. Mas o **
         exercises: [
             {
                 id: "9",
-                title: "Exercício 1",
+                title: `
+# **Exercício 1**`,
                 content: "Faça um programa que peça um valor e mostre na tela se é positivo ou negativo. ",
                 image: null,
                 options: [
@@ -610,7 +619,8 @@ Se fosse no comando **“while”** ele não iria nem imprimir na tela. Mas o **
             },
             {
                 id: "10",
-                title: "Exercício 2",
+                title: `
+# **Exercício 2**`,
                 content: "Faça um programa que peça um número e imprima se o número é par ou ímpar. ",
                 image: null,
                 options: [
@@ -619,7 +629,8 @@ Se fosse no comando **“while”** ele não iria nem imprimir na tela. Mas o **
             },
             {
                 id: "11",
-                title: "Exercício 3",
+                title: `
+# **Exercício 3**`,
                 content: `Faça um programa que peça três notas de um aluno e calcule a média. Analisar a média e imprimir uma das mensagens a seguir:  
 a) A mensagem “Aprovado”, se a média for maior ou igual a 7, com a respectiva média alcançada.  
 b) A mensagem “Reprovado”, se a média for menor do que 7, com a respectiva média alcançada.  
@@ -631,7 +642,8 @@ c) A mensagem “Aprovado com Distinção”, se a média for igual a 10.`,
             },
             {
                 id: "12",
-                title: "Exercício 4",
+                title: `
+# **Exercício 4**`,
                 content: `Faça um programa que verifique se a letra digitada for: F ou M e imprima uma mensagem: masculino, feminino ou sexo inválido.`,
                 image: null,
                 options: [
@@ -640,7 +652,8 @@ c) A mensagem “Aprovado com Distinção”, se a média for igual a 10.`,
             },
             {
                 id: "13",
-                title: "Exercício 5",
+                title: `
+# **Exercício 5**`,
                 content: `Faça um programa que pergunte que turno você estuda. Peça para digitar M-Matutino, V-Vespertino ou N-Noturno. Imprima a mensagem Bom Dia, Boa tarde, Boa Noite ou Valor Inválido, conforme o caso.`,
                 image: null,
                 options: [
@@ -649,7 +662,8 @@ c) A mensagem “Aprovado com Distinção”, se a média for igual a 10.`,
             },
             {
                 id: "14",
-                title: "Exercício 6",
+                title: `
+# **Exercício 6**`,
                 content: `Faça um programa que leia um número e exiba o dia correspondente da semana. (1-Domingo, 2-Segunda,etc), se digitar outro valor deve aparecer valor inválido.`,
                 image: null,
                 options: [
@@ -658,7 +672,8 @@ c) A mensagem “Aprovado com Distinção”, se a média for igual a 10.`,
             },
             {
                 id: "15",
-                title: "Exercício 7",
+                title: `
+# **Exercício 7**`,
                 content: `Peça ao usuário para digitar um número inteiro. Mostre a tabuada desse número, de 1 até 10.`,
                 image: null,
                 options: [
@@ -667,7 +682,8 @@ c) A mensagem “Aprovado com Distinção”, se a média for igual a 10.`,
             },
             {
                 id: "16",
-                title: "Exercício 8",
+                title: `
+# **Exercício 8**`,
                 content: `Peça ao usuário que digite uma senha. Enquanto a senha digitada estiver incorreta (ex: “1234”), o programa deve pedir novamente.`,
                 image: null,
                 options: [
@@ -766,7 +782,8 @@ A entrada e saída de dados são fundamentais na programação em C, permitindo 
         exercises: [
             {
                 id: "17",
-                title: "Exercício 1",
+                title: `
+# **Exercício 1**`,
                 content: "Qual das funções a seguir é usada para exibir dados na tela em **C**? ",
                 image: null,
                 options: [
@@ -779,7 +796,8 @@ A entrada e saída de dados são fundamentais na programação em C, permitindo 
             },
             {
                 id: "18",
-                title: "Exercício 2",
+                title: `
+# **Exercício 2**`,
                 content: " Qual das funções abaixo é adequada para ler um número inteiro digitado pelo usuário? ",
                 image: null,
                 options: [
@@ -792,7 +810,8 @@ A entrada e saída de dados são fundamentais na programação em C, permitindo 
             },
             {
                 id: "19",
-                title: "Exercício 3",
+                title: `
+# **Exercício 3**`,
                 content: "Qual especificador de formato é usado para imprimir um número com ponto flutuante **(float)?** ",
                 image: null,
                 options: [
@@ -803,6 +822,166 @@ A entrada e saída de dados são fundamentais na programação em C, permitindo 
                 ],
                 answer: "%f"
             }
+        ],
+    },
+    {
+        thumb: "",
+        title: {
+            text: "Exercícios - Slides ",
+            content: "",
+            image: null,
+        },
+        subtitles: [
+        ],
+        exercises: [
+            {
+                id: "20",
+                title: `
+# **Exercício 1** - Construa um programa que mostre seu nome e idade na tela.`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h> // Inclui a biblioteca padrão de entrada e saída (para usar printf)
+
+    int main(void) {
+        // Mostrando o nome
+        printf("Nome: Pedro Martins do Nascimento\\n");
+
+        // Mostrando a idade
+        printf("Idade: 21 anos\\n");
+
+        return 0;
+    }
+
+    `,
+                image: null,
+                options: []
+            },
+            {
+                id: "21",
+                title: `
+# **Exercício 2** - Construa um programa que mostre em tela um cartão de visitas.  
+- Nome
+- Cargo
+- Empresa
+- Telefone
+- Email         
+`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h> // Inclui a biblioteca padrão de entrada e saída (para usar printf)
+
+    int main(void) {
+        printf("===============================================\\n"); // Linha superior do cartão
+        printf("|                                              |\\n");
+        printf("|              CARTAO DE VISITAS               |\\n"); // Título
+        printf("|==============================================|\\n");
+        printf("| Nome: Pedro Martins do Nascimento            |\\n"); // Seu nome
+        printf("| Cargo: Desenvolvedor                         |\\n"); // Seu cargo ou área
+        printf("| Empresa: Tech Solutions                      |\\n"); // Nome da empresa
+        printf("| Telefone: (47) 99999-8888                    |\\n"); // Telefone de contato
+        printf("| Email: pedro.prof@email.com                  |\\n"); // E-mail de contato
+        printf("|==============================================|\\n");
+
+        return 0; // Indica que o programa terminou com sucesso
+    }
+
+`,
+                image: null,
+                options: []
+            },
+            {
+                id: "22",
+                title: `
+# **Exercício 3** - Mostre seu nome na tela com printf().`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+
+    int main() {
+        printf("Meu nome é Enrique. \\n")
+        return 0;
+    }
+
+`,
+                image: null,
+                options: []
+            },
+            {
+                id: "23",
+                title: `
+# **Exercício 4** - Peça dois números e mostre a soma`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+
+    int main() {
+        int a, b, soma;
+
+        printf("Digite o primeiro número: ");
+        scanf("%i", &a);
+
+        printf("Digite o segundo número: ");
+        scanf("%i", &b);
+
+        soma = a + b;
+
+        printf("A soma é: %i\\n", soma);
+
+        return 0;
+    }
+
+
+`,
+                image: null,
+                options: []
+            },
+            {
+                id: "24",
+                title: `
+# **Exercício 5** - Peça nome, idade e cidade e mostre em uma frase.  
+**Dica:** Use vetores para guardar palavras ou textos  
+Ex.:
+- char nome[30];
+- char cidade[30];`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+
+    int main() {
+        char nome[30];
+        int idade;
+        char cidade[30];
+
+        printf("Digite seu nome: ");
+        scanf("%s", nome);
+
+        printf("Digite sua idade: ");
+        scanf("%i", &idade);
+
+        printf("Digite sua cidade: ");
+        scanf("%s", cidade);
+
+        printf("Olá, %s! Você tem %i anos e mora em %s.\\n", nome, idade, cidade);
+
+        return 0;
+    }
+
+`,
+                image: null,
+                options: []
+            },
+
+            
         ],
     }
 ];
