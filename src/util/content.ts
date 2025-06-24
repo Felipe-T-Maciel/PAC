@@ -980,7 +980,328 @@ Ex.:
                 image: null,
                 options: []
             },
+            {
+                id: "25",
+                title: `
+# **Exercício 6** - Peça ao usuário para digitar o número da sorte dele. Mostre esse número na tela.  
+**Dica:**  
+- **int** para declarar as variáveis;
+- **scanf()** e **fflush(stdin)** para entrada;
+- **printf()** para exibir o resultado;`,
+                content: `
 
+# **Resposta**:
+
+    #include <stdio.h>
+
+    int main() {
+        int numero;
+
+        printf("Digite seu número da sorte: ");
+        scanf("%d", &numero);
+        fflush(stdin);
+
+        printf("Seu número da sorte é: %d\\n", numero);
+
+        return 0;
+    }
+
+`,
+                image: null,
+                options: []
+            },
+{
+                id: "26",
+                title: `
+# **Exercício 7** - Peça ao usuário para digitar o número do calçado dele e mostre o valor digitado.  
+**Dica:**  
+- **int** para declarar as variáveis;
+- **scanf()** e **fflush(stdin)** para entrada;
+- **printf()** para exibir o resultado;`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+
+    int main() {
+        int calcado;
+
+        printf("Digite o número do seu calçado: ");
+        scanf("%d", &calcado);
+        fflush(stdin);
+
+        printf("Você calça: %d\\n", calcado);
+
+        return 0;
+    }
+
+`,
+                image: null,
+                options: []
+            },
+            {
+                id: "27",
+                title: `
+# **Exercício 8** - Peça ao usuário dois números inteiros. Calcule o resultado e multiplique e mostre o resultado da expressão.  
+**Dica:**  
+- **int** para declarar as variáveis;
+- **scanf()** e **fflush(stdin)** para entrada;
+- **printf()** para exibir o resultado;
+- Um operador por exercicío: **+**, **-**, *;
+- Lembre-se da ordem de Precedência`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+
+    int main() {
+        int num1, num2, resultado;
+
+        printf("Digite o primeiro número: ");
+        scanf("%d", &num1);
+        fflush(stdin);
+
+        printf("Digite o segundo número: ");
+        scanf("%d", &num2);
+        fflush(stdin);
+
+        resultado = (num1 + num2) * 2;
+
+        printf("Resultado da expressão: %d\\n", resultado);
+
+        return 0;
+    }`,
+                image: null,
+                options: []
+            },
+            {
+                id: "28",
+                title: `
+# **Exercício 9** - Peça ao usuário dois números inteiros, subtraia eles e mostre o resultado da expressão.  
+**Dica:**  
+- **int** para declarar as variáveis;
+- **scanf()** e **fflush(stdin)** para entrada;
+- **printf()** para exibir o resultado;
+- Um operador por exercicío: **+**, **-**, *;
+- Lembre-se da ordem de Precedência`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+
+    int main() {
+        int num1, num2, subtracao;
+
+        printf("Digite o primeiro número: ");
+        scanf("%d", &num1);
+        fflush(stdin);
+
+        printf("Digite o segundo número: ");
+        scanf("%d", &num2);
+        fflush(stdin);
+
+        subtracao = num1 - num2;
+
+        printf("Resultado da subtração: %d\\n", subtracao);
+
+        return 0;
+    }`,
+                image: null,
+                options: []
+            },
+            {
+                id: "29",
+                title: `
+# **Exercício 10** - Peça ao usuário dois números inteiros, multiplique eles e mostre o resultado da expressão.  
+**Dica:**  
+- **int** para declarar as variáveis;
+- **scanf()** e **fflush(stdin)** para entrada;
+- **printf()** para exibir o resultado;
+- Um operador por exercicío: **+**, **-**, *;
+- Lembre-se da ordem de Precedência`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+
+    int main() {
+        int num1, num2, multiplicacao;
+
+        printf("Digite o primeiro número: ");
+        scanf("%d", &num1);
+
+        printf("Digite o segundo número: ");
+        scanf("%d", &num2);
+        fflush(stdin);
+
+        multiplicacao = num1 * num2;
+
+        printf("Resultado da multiplicação: %d\\n", multiplicacao);
+
+        return 0;
+    }`,
+                image: null,
+                options: []
+            },
+            {
+                id: "30",
+                title: `
+# **Exercício 11** - Construa um algoritmo que peça a temperatura em graus celsuius (°C), transforme e mostre na tela a temperatura em graus fahrenheit (°F).`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(void){
+    // Quais são as variáveis?
+        float c,f;
+
+        // Qual é a entrada de dados?
+        printf("Digite o valor em graus Fahrenheit: ");
+        scanf("%f", &f);
+        fflush(stdin); // Limpar dados do teclado
+
+        // Qual é o processamento de dados?
+        c=5*(f-32)/9;
+
+        // Qual é a saída de dados?
+        printf("O valor em Celsius e %.0f\\n",c);
+
+        return 0;
+    }
+
+
+`,
+                image: null,
+                options: []
+            },
+            {
+                id: "31",
+                title: `
+# **Exercício 12** - Construa um algoritmo que peça a temperatura em graus fahrenheit (°F), transforme e mostre na tela a temperatura em graus celsius (°C).`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(void){
+    // Quais são as variáveis?
+        float c,f;
+
+        // Qual é a entrada de dados?
+        printf("Digite o valor em graus Celsius: ");
+        scanf("%f", &c);
+        fflush(stdin); // Limpar dados do teclado
+
+        // Qual é o processamento de dados?
+        // c = 5*(f-32)/9;
+        f = c * 9 / 5 + 32;
+
+        // Qual é a saída de dados?
+        printf("O valor em Fahrenheit e %f\\n", f);
+
+        return 0;
+    }
+
+
+`,
+                image: null,
+                options: []
+            },
+            {
+                id: "32",
+                title: `
+# **Exercício 13** - Construa um programa que peça as 4 notas bimestrais e mostre a média`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(void){
+    // Quais são as variáveis?
+        float n1, n2, n3, n4, m;
+
+        // Qual é a entrada de dados?
+        printf("Digite nota 1: ");
+        scanf("%f", &n1);
+        fflush(stdin);
+        
+        printf("Digite nota 2: ");
+        scanf("%f", &n2);
+        fflush(stdin);
+        
+        printf("Digite nota 3: ");
+        scanf("%f", &n3);
+        fflush(stdin);
+        
+        printf("Digite nota 4: ");
+        scanf("%f", &n4);
+        fflush(stdin);
+
+        // Qual é o processamento de dados?
+        m = (n1 + n2 + n3 + n4) / 4;
+
+        // Qual é a saída de dados?
+        printf("A media e %.1f\\n", m);
+
+        return 0;
+    }
+
+`,
+                image: null,
+                options: []
+            },
+
+        {
+                id: "33",
+                title: `
+# **Exercício 14** - Construa um algoritmo que peça 2 números inteiros e um número real`,
+                content: `
+
+# **Resposta**:
+
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(void){
+    // Quais são as variáveis?
+        int n1, n2;
+        float n3;
+
+        // Qual é a entrada de dados?
+        printf("Digite o primeiro numero inteiro: ");
+        scanf("%d", &n1);
+        fflush(stdin);
+
+        printf("Digite o segundo numero inteiro: ");
+        scanf("%d", &n2);
+        fflush(stdin);
+
+        printf("Digite um numero real: ");
+        scanf("%f", &n3);
+        fflush(stdin);
+
+        // Qual é a saída de dados?
+        printf("Os numeros digitados foram %d, %d e %.2f\\n", n1, n2, n3);
+
+        return 0;
+    }
+
+`,
+                image: null,
+                options: []
+            },
+            
             
         ],
     }
